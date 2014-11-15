@@ -33,6 +33,8 @@ class Envio (val caracteristicas : Set[ServicioExtra],
 */	  
     }
   
+
+	
 	def ultimaSemanaDelMes(): Boolean = {
 	  var cal: Calendar = Calendar.getInstance()
 	  cal.setTime(this.fecha)

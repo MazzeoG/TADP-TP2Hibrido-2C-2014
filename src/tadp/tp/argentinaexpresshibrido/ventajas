@@ -1,0 +1,8 @@
+/* 
+Esta version mas "funcionalosa" nos permite aplicar conceptos como pattern maching, composicion, aplicacion parcial, entre otros.
+Estos conceptos hacen mas claro el código en algunas partes, como por ejemplo a la hora de calcular el costo final de un envio, 
+que en la version objetosa queda mas larga y dificil de seguir. Tambien el patern matching ayudó a la hora de separar comportamiento
+entre las clases, aplicando un simple match se puede separar el comportamiento de los envios frágiles, normales, urgentes y 
+refrigerados o de los diferentes tipos de transporte. Tambien es destacable que reduce al minimo las expresiones if-else, y permite 
+extender las condiciones separandolas en los diferentes case, lo que hace un codigo un poco mas extensible y claro.
+*/
