@@ -4,7 +4,7 @@ class Sucursal (var transporte : Set[Transporte], val volumenTotal : Int, val pa
 
   var envios : Set[Envio] = Set()
   var volumen:Int = 0
-   
+   var viajesRealizados : Set[Viaje] = Set()
   
   def volumenDisponible():Int={
     (this.volumenTotal) - (this.volumenEnviosEnSucursal);

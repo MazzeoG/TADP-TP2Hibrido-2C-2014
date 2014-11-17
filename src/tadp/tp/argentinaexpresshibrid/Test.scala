@@ -51,7 +51,7 @@ class TransporteTest {
     sucursalArg.asignarEnvioATransporte(unEnvioChico)
     assertEquals(true,camion1.enviosAsignados.contains(unEnvioChico))	  
   }
-  
+  //corriste otros PETE
   @Test
   def `las caracteristicas deben ser las mismas` = {
     val sucursalArg = new Sucursal(Set(),1000,"Argentina")   

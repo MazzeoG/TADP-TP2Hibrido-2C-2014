@@ -81,41 +81,41 @@ abstract class Transporte(val serviciosExtra: Set[ServicioExtra], var sucursalOr
     envio.caracteristicas.forall(carac => this.serviciosExtra.contains(carac))
   }
 
-  val costoDeEnvios = this.enviosAsignados.map((e: Envio) => e.costoBase()).sum
+ lazy  val costoDeEnvios = this.enviosAsignados.map((e: Envio) => e.costoBase()).sum
 
-  val sumaPrecioPeajes = { (unCosto: Int) => unCosto + precioPeajes }
+ lazy  val sumaPrecioPeajes = { (unCosto: Int) => unCosto + precioPeajes }
 
-  val sumaCostoRefrigeracion = { (unCosto: Int) => unCosto + costoDeRefrigeracion }
+ lazy  val sumaCostoRefrigeracion = { (unCosto: Int) => unCosto + costoDeRefrigeracion }
 
-  val avionConPeaje = { (unCosto: Double) =>
+lazy  val avionConPeaje = { (unCosto: Double) =>
     unCosto + (sucursalOrigen.pais == this.sucursalDestino.pais match {
       case true => 0
       case _ => costoDeTransporte * impuestoAvion
     })
   }
 
-  val costoDeTransporte = this.costoTransporte(sucursalOrigen, sucursalDestino)
+ lazy  val costoDeTransporte = this.costoTransporte(sucursalOrigen, sucursalDestino)
 
-  val sumaCostoRevisionTecnica = { (unCosto: Double) =>
+  lazy val sumaCostoRevisionTecnica = { (unCosto: Double) =>
     unCosto + ((this.sucursalDestino.esCasaCentral() && this.ultimaSemanaDelMes()) match {
       case true => costoRevisionTecnica(costoDeTransporte)
       case _ => 0
     })
   }
 
-  val sumaReduccionDeInsumos = { (unCosto: Double) =>
+ lazy  val sumaReduccionDeInsumos = { (unCosto: Double) =>
     unCosto - ((pasadoElDia20 && sucursalDestino.esCasaCentral) match {
       case true => reduccionInsumos(costoDeTransporte)
       case _ => 0
     })
   }
 
-  val multiplicaCostoTransporte = { (unCosto: Double) => unCosto + costoDeTransporte * multiplicador }
+ lazy  val multiplicaCostoTransporte = { (unCosto: Double) => unCosto + costoDeTransporte * multiplicador }
 
-  val sumaCostoGPS = { (unCosto: Double) => unCosto + costoGPS }
-  val sumaCostoVideo = { (unCosto: Double) => unCosto + costoVideo }
-  val sumaCostoSustanciasPeligrosas = { (unCosto: Double) => unCosto + costoSustanciasPeligrosas }
-  val sumaCostoAnimales = { (unCosto: Double) => unCosto + costoAnimales }
+ lazy  val sumaCostoGPS = { (unCosto: Double) => unCosto + costoGPS }
+ lazy  val sumaCostoVideo = { (unCosto: Double) => unCosto + costoVideo }
+ lazy  val sumaCostoSustanciasPeligrosas = { (unCosto: Double) => unCosto + costoSustanciasPeligrosas }
+ lazy  val sumaCostoAnimales = { (unCosto: Double) => unCosto + costoAnimales }
 
   implicit class FExt[A, B](f: A => B) {
     def <*[C](g: C => A) = {
