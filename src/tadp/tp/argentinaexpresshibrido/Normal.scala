@@ -1,7 +1,6 @@
 package tadp.tp.argentinaexpresshibrido
 
 import java.text.SimpleDateFormat
-
 import java.util.{Calendar, Date}
 
 class Normal (override val caracteristicas : Set[ServicioExtra],

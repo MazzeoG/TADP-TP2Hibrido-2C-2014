@@ -8,6 +8,9 @@ extends Terrestre (serviciosExtra, sucursalOrigen) {
   override val valorPeaje : Int = 6
   
 
+  override def puedeCargarFragiles() ={
+    true
+  }
 
   def costo(envio:Envio){
     var costoFinal = 

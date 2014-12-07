@@ -12,4 +12,8 @@ class Fragil (override val caracteristicas : Set[ServicioExtra],
 extends Envio (caracteristicas, sucursalOrigen, sucursalDestino, volumen, fecha){
   override def precio()={120}
   override def costoBase()={18}
+  
+  override def esCargablePor(transporte: Transporte) : Boolean = {
+	  transporte.puedeCargarFragiles
+  }
 }

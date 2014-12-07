@@ -52,4 +52,8 @@ class Envio (val caracteristicas : Set[ServicioExtra],
 	  
 	  cal.get(Calendar.DAY_OF_MONTH) > 20
 	}
+	
+	def esCargablePor(transporte: Transporte) : Boolean = {
+	  true
+	}
 }

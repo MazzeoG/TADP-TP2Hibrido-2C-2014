@@ -1,10 +1,10 @@
 package tadp.tp.argentinaexpresshibrido
 
 import java.text.SimpleDateFormat
-import java.util.{ Calendar, Date }
+import java.util.{Calendar, Date}
 
 abstract class Transporte(val serviciosExtra: Set[ServicioExtra], var sucursalOrigen: Sucursal)
-  extends CalculadorDistancia {
+      extends CalculadorDistancia with Estadisticas{
   val volumenDeCarga: Int
   val costoPorKm: Int
   val velocidad: Int
@@ -13,6 +13,7 @@ abstract class Transporte(val serviciosExtra: Set[ServicioExtra], var sucursalOr
   var fechaEnvio: Date = null
   val valorPeaje: Int
   val volOcupadoMulti: Double = 0.2
+  var viajesRealizados : Set[Viaje] = Set()
   // Inicializacion de los transportes
   if (sucursalOrigen != null)
     sucursalOrigen.agregarTransporte(this)
@@ -36,8 +37,11 @@ abstract class Transporte(val serviciosExtra: Set[ServicioExtra], var sucursalOr
     this.enviosAsignados.isEmpty
   }
 
-  def volumenEnvios(): Int = {
-    this.enviosAsignados.map((e: Envio) => e.volumen).sum
+  def volumenEnvios() :Int = {
+//     var volumenOcupado:Int = 0;
+//     this.enviosAsignados.foreach((e:Envio) =>volumenOcupado+= e.volumen)
+//     volumenOcupado
+     this.enviosAsignados.toList.map((e:Envio) => e.volumen).sum
   }
 
   def volumenDisponible(): Int = {
@@ -46,7 +50,7 @@ abstract class Transporte(val serviciosExtra: Set[ServicioExtra], var sucursalOr
 
   //Funcion utilizada para validar que un transporte pueda cargar un envio
   def puedeCargar(envio: Envio): Boolean = {
-    var cargable: Boolean = coincideDestino(envio) && entraEnTransporte(envio) && entraEnAvion(envio) && infraestructuraNecesaria(envio)
+    var cargable: Boolean = coincideDestino(envio) && entraEnTransporte(envio) && entraEnAvion(envio) && infraestructuraNecesaria(envio) && coincideTipoDeEnvio(envio) 
     envio match {
       case envio: Fragil => cargable = cargable && puedeCargarFragiles
       case envio: Urgente => cargable = cargable && puedeCargarUrgentes
@@ -64,6 +68,10 @@ abstract class Transporte(val serviciosExtra: Set[ServicioExtra], var sucursalOr
     }
   }
 
+  def coincideTipoDeEnvio(envio: Envio) : Boolean ={
+    var clase = envio.getClass()
+    enviosAsignados.forall(_.getClass() == clase)
+  }
   //Si el transporte cuyo envio esta siendo cargado es un avion, valida que la distancia sea mayor a 1000
   def entraEnDestino(envio: Envio): Boolean = {
     envio.sucursalDestino.volumenDisponible >= envio.volumen
@@ -80,6 +88,7 @@ abstract class Transporte(val serviciosExtra: Set[ServicioExtra], var sucursalOr
   def infraestructuraNecesaria(envio: Envio): Boolean = {
     envio.caracteristicas.forall(carac => this.serviciosExtra.contains(carac))
   }
+
 
  lazy  val costoDeEnvios = this.enviosAsignados.map((e: Envio) => e.costoBase()).sum
 
@@ -238,9 +247,21 @@ lazy  val avionConPeaje = { (unCosto: Double) =>
     0
   }
 
-  def regresarASucursal() = {
-    sucursalOrigen.agregarTransporte(this)
-    sucursalDestino = null
+  def regresarASucursal() ={
+   sucursalOrigen.agregarTransporte(this) 
+   sucursalDestino = null
+  }
+  
+  def calcularGananciaBruta() : Double = {
+    enviosAsignados.toList.map(_.precio).sum
+  }
+  
+  def calcularGananciaNeta() : Double = {
+    calcularGananciaBruta - calcularCostoViaje
+  }  
+  
+  def calcularTiempoViaje() : Double = {
+    distanciaEntreSucursales / velocidad
   }
 }
 

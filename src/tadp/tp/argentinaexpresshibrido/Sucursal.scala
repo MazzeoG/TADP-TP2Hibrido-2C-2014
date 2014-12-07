@@ -1,10 +1,10 @@
 package tadp.tp.argentinaexpresshibrido
 
-class Sucursal (var transporte : Set[Transporte], val volumenTotal : Int, val pais : String) extends CalculadorDistancia{
+class Sucursal (var transporte : Set[Transporte], val volumenTotal : Int, val pais : String) extends CalculadorDistancia with Estadisticas{
 
   var envios : Set[Envio] = Set()
   var volumen:Int = 0
-   var viajesRealizados : Set[Viaje] = Set()
+  var viajesRealizados : Set[Viaje] = Set()
   
   def volumenDisponible():Int={
     (this.volumenTotal) - (this.volumenEnviosEnSucursal);
@@ -20,11 +20,11 @@ class Sucursal (var transporte : Set[Transporte], val volumenTotal : Int, val pa
   }
   
   def volumenEnviosEnSucursal() : Int ={
-	(this.transporte.map((t:Transporte) => t.volumenEnvios).sum) + (this.envios.map((e:Envio) => e.volumen).sum)
+	(this.transporte.toList.map((t:Transporte) => t.volumenEnvios).sum) + (this.envios.map((e:Envio) => e.volumen).sum)
   }
 
   def volumenEnviosASucursal(destino : Sucursal) : Int ={
-	this.transporte.filter((t: Transporte)=> t.sucursalDestino == destino).map((t:Transporte) => t.volumenEnvios).sum
+	this.transporte.filter((t: Transporte)=> t.sucursalDestino == destino).toList.map((t:Transporte) => t.volumenEnvios).sum
   } 
   
   def asignarEnvioATransporte(envio: Envio): Option[Transporte] = {
@@ -56,6 +56,8 @@ class Sucursal (var transporte : Set[Transporte], val volumenTotal : Int, val pa
   def mandarTransporte(tran : Transporte) = {
 	  //El transporte esta en la sucursal y tiene pedidos para enviar?
 	  if (transporte.contains(tran) && (tran.sucursalDestino != null) && (tran.sucursalOrigen != null) && (!tran.enviosAsignados.isEmpty)) {
+		altaDeViaje(tran)
+
 	    quitarTransporte(tran)
 	    tran.sucursalDestino.recibirEnvio(Some(tran))
 	  }
@@ -71,6 +73,7 @@ class Sucursal (var transporte : Set[Transporte], val volumenTotal : Int, val pa
       t.enviosAsignados.foreach(this.envios += _ ) // Pasamos los pedidos a la sucursal
       t.enviosAsignados = Set() // Vaciamos los pedidos del transporte
       t.regresarASucursal // Retorna a la sucursal de origen
+
     })
       
   }
@@ -83,7 +86,14 @@ class Sucursal (var transporte : Set[Transporte], val volumenTotal : Int, val pa
   //3. Un paquete se retira de la sucursal destino
   
   def retirarEnvio(envio: Envio) ={
-    this.envios -- Set(envio)
+    this.envios -= envio
   }
   
+  def altaDeViaje (tran: Transporte) = {
+    var unViaje : Viaje = new Viaje(this, tran.sucursalDestino, tran, tran.enviosAsignados, 
+    								tran.calcularCostoViaje, tran.calcularGananciaNeta,
+    								tran.fechaEnvio, nombreClase(tran.enviosAsignados.head), tran.calcularTiempoViaje)
+    tran.viajesRealizados += unViaje
+    this.viajesRealizados += unViaje
+  }
 }

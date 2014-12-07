@@ -12,4 +12,8 @@ class Urgente (override val caracteristicas : Set[ServicioExtra],
 extends Envio (caracteristicas, sucursalOrigen, sucursalDestino, volumen, fecha){
 	override def precio()={110}
 	override def costoBase()={20}
+	
+	override def esCargablePor(transporte: Transporte) : Boolean = {
+	  transporte.puedeCargarUrgentes
+	}
 }
