@@ -12,7 +12,7 @@ class Camion(override val serviciosExtra: Set[ServicioExtra], sucursalOrigen: Su
     true
   }
 
-   val vDeEvioSobreCarga = (this.volumenEnvios.toDouble / this.volumenDeCarga.toDouble)
+  lazy val vDeEvioSobreCarga = (this.volumenEnvios.toDouble / this.volumenDeCarga.toDouble)
     
   override def multiplicador(): Double = {
     ((this.volumenDeCarga * volOcupadoMulti >= this.volumenEnvios)
@@ -28,12 +28,12 @@ class Camion(override val serviciosExtra: Set[ServicioExtra], sucursalOrigen: Su
     costoDeTransporte * 0.02
   }
 
-  val sumaVsobreCarga = 3 * enviosAsignados.filter(_.isInstanceOf[Urgente]).map(_.volumen).sum / volumenDeCarga
+  lazy val sumaVsobreCarga = 3 * enviosAsignados.filter(_.isInstanceOf[Urgente]).toList.map(_.volumen).sum / volumenDeCarga
 
   override def costoSustanciasPeligrosas(): Double = {
-    enviosAsignados.count(_.caracteristicas.exists(_.soyInfraestructuraSustancias)) match {
-      case 0 => 0
-      case _ => 600 + sumaVsobreCarga
+    enviosAsignados.exists(_.caracteristicas.exists(_.soyInfraestructuraSustancias)) match {
+      case false => 0
+      case true => 600 + sumaVsobreCarga
     }
   }
 }

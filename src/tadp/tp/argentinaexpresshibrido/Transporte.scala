@@ -90,13 +90,13 @@ abstract class Transporte(val serviciosExtra: Set[ServicioExtra], var sucursalOr
   }
 
 
- lazy  val costoDeEnvios = this.enviosAsignados.map((e: Envio) => e.costoBase()).sum
+ lazy  val costoDeEnvios = this.enviosAsignados.toList.map((e: Envio) => e.costoBase()).sum
 
- lazy  val sumaPrecioPeajes = { (unCosto: Int) => unCosto + precioPeajes }
+ lazy  val sumaPrecioPeajes = { (unCosto: Double) => unCosto + precioPeajes }
+ 
+ lazy  val sumaCostoRefrigeracion = { (unCosto: Double) => unCosto + costoDeRefrigeracion }
 
- lazy  val sumaCostoRefrigeracion = { (unCosto: Int) => unCosto + costoDeRefrigeracion }
-
-lazy  val avionConPeaje = { (unCosto: Double) =>
+ lazy  val avionConPeaje = { (unCosto: Double) =>
     unCosto + (sucursalOrigen.pais == this.sucursalDestino.pais match {
       case true => 0
       case _ => costoDeTransporte * impuestoAvion
@@ -105,6 +105,8 @@ lazy  val avionConPeaje = { (unCosto: Double) =>
 
  lazy  val costoDeTransporte = this.costoTransporte(sucursalOrigen, sucursalDestino)
 
+ lazy  val costoBaseDeTransporte = (costoDeTransporte + costoDeEnvios)
+ 
   lazy val sumaCostoRevisionTecnica = { (unCosto: Double) =>
     unCosto + ((this.sucursalDestino.esCasaCentral() && this.ultimaSemanaDelMes()) match {
       case true => costoRevisionTecnica(costoDeTransporte)
@@ -132,8 +134,8 @@ lazy  val avionConPeaje = { (unCosto: Double) =>
     }
   }
 
-  val calcularCostoViaje = (sumaCostoAnimales <* sumaCostoSustanciasPeligrosas <* sumaCostoVideo <* sumaCostoGPS <* sumaReduccionDeInsumos <* sumaCostoRevisionTecnica <* avionConPeaje <* sumaCostoRefrigeracion <* sumaPrecioPeajes)(costoDeEnvios)
-
+lazy val calcularCostoViaje = (sumaCostoAnimales <* sumaCostoSustanciasPeligrosas <* sumaCostoVideo <* sumaCostoGPS <* sumaReduccionDeInsumos <* sumaCostoRevisionTecnica <* avionConPeaje <* sumaCostoRefrigeracion <* sumaPrecioPeajes <* multiplicaCostoTransporte)(costoDeEnvios)
+  
   def costoTransporte(sucursalOrigen: Sucursal, sucursalDestino: Sucursal): Double = {
     this match {
       case transporte: Avion => this.costoPorKm * this.distanciaAereaEntre(sucursalOrigen, sucursalDestino)
