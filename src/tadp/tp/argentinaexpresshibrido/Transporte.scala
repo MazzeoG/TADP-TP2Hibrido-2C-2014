@@ -50,6 +50,7 @@ abstract class Transporte(val serviciosExtra: Set[ServicioExtra], var sucursalOr
 
   //Funcion utilizada para validar que un transporte pueda cargar un envio
   def puedeCargar(envio: Envio): Boolean = {
+	//CORRECCION: una version mas funcional no usaria un var para cargable
     var cargable: Boolean = coincideDestino(envio) && entraEnTransporte(envio) && entraEnAvion(envio) && infraestructuraNecesaria(envio) && coincideTipoDeEnvio(envio) 
     envio match {
       case envio: Fragil => cargable = cargable && puedeCargarFragiles
@@ -60,6 +61,7 @@ abstract class Transporte(val serviciosExtra: Set[ServicioExtra], var sucursalOr
     cargable
   }
 
+  //CORRECCION: hicieron lo mismo que la version objetosa pero cambiaron un if por pattern matching mal usado.
   def coincideDestino(envio: Envio): Boolean = {
 
     enviosAsignados.size match {
