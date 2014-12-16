@@ -4,6 +4,7 @@ abstract class Aereo (override val serviciosExtra : Set[ServicioExtra], sucursal
 extends Transporte (serviciosExtra, sucursalOrigen){
 
   override def distanciaEntreSucursales(): Double ={
-    distanciaAereaEntre(sucursalOrigen, sucursalDestino)
+    val calc = new CalculadorDistancia
+    calc.distanciaAereaEntre(sucursalOrigen, sucursalDestino)
   }
 }

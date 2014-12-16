@@ -8,6 +8,7 @@ extends Transporte (serviciosExtra, sucursalOrigen){
   }
   
   override def distanciaEntreSucursales(): Double ={
-    distanciaTerrestreEntre(sucursalOrigen, sucursalDestino)
+    var calc =new CalculadorDistancia
+    calc.distanciaTerrestreEntre(sucursalOrigen, sucursalDestino)
   }
 }

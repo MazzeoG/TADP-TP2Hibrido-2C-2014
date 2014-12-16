@@ -1,6 +1,6 @@
 package tadp.tp.argentinaexpresshibrido
 
-trait CalculadorDistancia {
+class CalculadorDistancia {
 	def distanciaTerrestreEntre(sucursal1: Sucursal, sucursal2: Sucursal): Double = {
 	  if (sucursal1.pais == sucursal2.pais) 
 		500

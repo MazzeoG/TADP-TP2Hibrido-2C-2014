@@ -3,7 +3,7 @@ package tadp.tp.argentinaexpresshibrido
 import java.text.SimpleDateFormat
 import java.util.{Calendar, Date}
 
-trait Estadisticas {
+class Estadisticas extends prettyPrinter{
   def filtrarPorSucursalDestino(viajes: Set[Viaje], sucursalBuscada : Sucursal): Set[Viaje] ={
     viajes.filter(_.sucursalDestino == sucursalBuscada)
   }
@@ -163,6 +163,10 @@ trait Estadisticas {
 	println("-----------------------------\n")
   }
   
+}
+
+
+trait prettyPrinter {
   def nombreClase(obj : Object): String = {
     var nombre : String = obj.getClass().toString()
     nombre = nombre.substring(nombre.lastIndexOf('.')+1)  

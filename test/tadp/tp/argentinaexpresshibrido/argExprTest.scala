@@ -382,6 +382,8 @@ class EstadisticasTest {
   	val sucursalArg = new Sucursal(Set(),1000,"Argentina")
   	val sucursalChi = new Sucursal(Set(),500,"Chile")
     val camion1 = new Camion(Set(), sucursalArg)
+  	val stats = new Estadisticas
+  	
   @Test
   def `Cantidad de viajes por transporte` = {
        
@@ -403,7 +405,7 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
-    sucursalArg.viajesPorTipoTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
+    stats.viajesPorTipoTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
   }
   
   @Test
@@ -429,7 +431,7 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
-    sucursalArg.enviosPorTipoTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
+    stats.enviosPorTipoTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
   }
   
   @Test
@@ -452,9 +454,9 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
-    sucursalArg.facturacionTotalPorRangoFecha(sucursalArg.viajesRealizados, new Date(2014,11,1), new Date(2014,11,5)) // Imprime estadistica en consola
-    sucursalArg.facturacionTotalPorRangoFecha(sucursalArg.viajesRealizados, new Date(2014,11,6), new Date(2014,11,11)) // Imprime estadistica en consola
-    sucursalArg.facturacionTotalPorRangoFecha(sucursalArg.viajesRealizados, new Date(2014,11,12), new Date(2014,11,22)) // Imprime estadistica en consola
+    stats.facturacionTotalPorRangoFecha(sucursalArg.viajesRealizados, new Date(2014,11,1), new Date(2014,11,5)) // Imprime estadistica en consola
+    stats.facturacionTotalPorRangoFecha(sucursalArg.viajesRealizados, new Date(2014,11,6), new Date(2014,11,11)) // Imprime estadistica en consola
+    stats.facturacionTotalPorRangoFecha(sucursalArg.viajesRealizados, new Date(2014,11,12), new Date(2014,11,22)) // Imprime estadistica en consola
   }  
   
   @Test
@@ -478,7 +480,7 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
-    sucursalArg.facturacionTotalPorFecha(sucursalArg.viajesRealizados, new Date(2014,11,7)) // Imprime estadistica en consola
+    stats.facturacionTotalPorFecha(sucursalArg.viajesRealizados, new Date(2014,11,7)) // Imprime estadistica en consola
   }
 
   @Test
@@ -515,7 +517,7 @@ class EstadisticasTest {
     sucursalChi.mandarTransporte(furgoneta3)
     sucursalChi.mandarTransporte(avion3)
     
-    sucursalArg.facturacionCompaniaPorSucursal(Set(sucursalArg,sucursalArg2, sucursalChi)) // Imprime estadistica en consola
+    stats.facturacionCompaniaPorSucursal(Set(sucursalArg,sucursalArg2, sucursalChi)) // Imprime estadistica en consola
   } 
   
   @Test
@@ -538,7 +540,7 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
-    sucursalArg.tiempoPromedioPorTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
+    stats.tiempoPromedioPorTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
   }
 
   @Test
@@ -561,6 +563,6 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
-    sucursalArg.costoPromedioPorTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
+    stats.costoPromedioPorTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
   }  
 }

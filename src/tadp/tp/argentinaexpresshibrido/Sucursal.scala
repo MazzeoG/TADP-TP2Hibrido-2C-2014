@@ -1,6 +1,6 @@
 package tadp.tp.argentinaexpresshibrido
 
-class Sucursal (var transporte : Set[Transporte], val volumenTotal : Int, val pais : String) extends CalculadorDistancia with Estadisticas{
+class Sucursal (var transporte : Set[Transporte], val volumenTotal : Int, val pais : String) extends prettyPrinter{
 
   var envios : Set[Envio] = Set()
   var volumen:Int = 0
