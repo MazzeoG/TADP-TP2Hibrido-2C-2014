@@ -542,7 +542,29 @@ class EstadisticasTest {
     
     stats.tiempoPromedioPorTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
   }
-
+  
+ @Test
+  def `Ganancia promedio por transporte` = {
+    val sucursalArg2 = new Sucursal(Set(),1000,"Argentina")  
+    val furgoneta1 = new Furgoneta(Set(), sucursalArg)
+    val avion1 = new Avion(Set(),sucursalArg)
+    var unEnvio = new Normal(Set(),sucursalArg,sucursalChi,40,new Date(2014,11,7))
+    var otroEnvio = new Normal(Set(),sucursalArg,sucursalArg2,8,new Date(2014,11,14))
+    var unEnvio2 = new Normal(Set(),sucursalArg,sucursalChi,100,new Date(2014,11,21)) 
+    
+    sucursalArg.asignarEnvioATransporte(unEnvio)
+    sucursalArg.asignarEnvioATransporte(unEnvio2)
+    sucursalArg.asignarEnvioATransporte(otroEnvio)
+    assertEquals(true,camion1.enviosAsignados.contains(unEnvio))
+    assertEquals(true,furgoneta1.enviosAsignados.contains(otroEnvio))
+    assertEquals(true,avion1.enviosAsignados.contains(unEnvio2))
+        
+    sucursalArg.mandarTransporte(camion1)
+    sucursalArg.mandarTransporte(furgoneta1)
+    sucursalArg.mandarTransporte(avion1)
+    
+    stats.gananciaPromedioPorTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
+  }
   @Test
   def `Costo promedio por transporte` = {
     val sucursalArg2 = new Sucursal(Set(),1000,"Argentina")  

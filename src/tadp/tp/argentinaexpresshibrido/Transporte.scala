@@ -111,12 +111,12 @@ def costoDeEnvios = this.enviosAsignados.toList.map((e: Envio) => e.costoBase())
  def sumaCostoSustanciasPeligrosas = { (unCosto: Double) => unCosto + costoSustanciasPeligrosas }
  def sumaCostoAnimales = { (unCosto: Double) => unCosto + costoAnimales }
 
-  implicit class FExt[A, B](f: A => B) {
+  implicit class FExt[A, B](f: A => B) {    //uso implicit class
     def <*[C](g: C => A) = {
       f compose g
     }
   }
-
+//uso composicion
 def calcularCostoViaje = (sumaCostoAnimales <* sumaCostoSustanciasPeligrosas <* sumaCostoVideo <* sumaCostoGPS <* sumaReduccionDeInsumos <* sumaCostoRevisionTecnica <* avionConPeaje <* sumaCostoRefrigeracion <* sumaPrecioPeajes <* multiplicaCostoTransporte)(costoDeEnvios)
   
   def costoTransporte(sucursalOrigen: Sucursal, sucursalDestino: Sucursal): Double = {
@@ -155,7 +155,6 @@ def calcularCostoViaje = (sumaCostoAnimales <* sumaCostoSustanciasPeligrosas <* 
     !this.serviciosExtra.find((s: ServicioExtra) => s.soyVideo).isEmpty
   }
 
-  // Falta definir la mutua exclusion
   def puedeLlevarAnimales(): Boolean = {
     !this.serviciosExtra.find((s: ServicioExtra) => s.soyInfraestructuraAnimales).isEmpty
   }

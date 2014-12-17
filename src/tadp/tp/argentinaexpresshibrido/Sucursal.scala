@@ -62,10 +62,7 @@ class Sucursal (var transporte : Set[Transporte], val volumenTotal : Int, val pa
 	    tran.sucursalDestino.recibirEnvio(Some(tran))
 	  }
 
-//    if (!transporteAsignado.isEmpty){
-//      this.transporte -- transporteAsignado
-//      envio.sucursalDestino.recibirEnvio(envio,transporteAsignado)
- //   }
+
   }
   
   def recibirEnvio(tran: Option[Transporte]) = {

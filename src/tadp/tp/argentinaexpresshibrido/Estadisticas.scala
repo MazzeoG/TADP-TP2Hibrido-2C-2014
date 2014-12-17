@@ -61,6 +61,37 @@ class Estadisticas extends prettyPrinter{
     viajes.toList.map(_.ganancia).sum
   }
   
+  def impresionEstadisticasPorTransporte(viajes: Set[Viaje], f1: (Set[Viaje], String) => Set[Viaje], f2: Set[Viaje] => _, titulo: String, subt: String) ={
+    val viajesCamion : Set[Viaje] = f1(viajes, "Camion")
+    val viajesFurgoneta : Set[Viaje] = f1(viajes, "Furgoneta")
+    val viajesAvion : Set[Viaje] = f1(viajes, "Avion")
+    
+    println(titulo)
+    println("--------------------------")
+    println("Transporte   -    " + subt)
+    println("Camion       :    " + f2(viajesCamion))
+    println("Furgoneta    :    " + f2(viajesFurgoneta))
+    println("Avion        :    " + f2(viajesAvion))
+    println("--------------------------\n")
+  }
+  
+  //Funciones con orden superior
+  def enviosPorTipoTransporte(viajes: Set[Viaje]) = {
+    impresionEstadisticasPorTransporte(viajes, filtrarPorTipoDeTransporte,cantidadDeEnvios,"ENVIOS POR TRANSPORTE","Cantidad")
+  }
+  
+  def tiempoPromedioPorTransporte(viajes: Set[Viaje]) = {
+    impresionEstadisticasPorTransporte(viajes, filtrarPorTipoDeTransporte,tiempoPromedioDeViajes,"TIEMPO PROMEDIO DE VIAJE","Tiempo(Hr)")
+  }
+  
+   def costoPromedioPorTransporte(viajes: Set[Viaje]) = {
+    impresionEstadisticasPorTransporte(viajes, filtrarPorTipoDeTransporte,costoPromedioDeViajes,"COSTO PROMEDIO DE VIAJE","Costo($)")
+  }
+   
+  def gananciaPromedioPorTransporte(viajes: Set[Viaje]) = {
+    impresionEstadisticasPorTransporte(viajes, filtrarPorTipoDeTransporte,gananciaPromedioDeViajes,"GANANCIA PROMEDIO DE VIAJE","Ganancia($)")
+  }
+   
   def viajesPorTipoTransporte(viajes: Set[Viaje]) ={
     val viajesCamion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Camion")
     val viajesFurgoneta : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Furgoneta")
@@ -75,7 +106,7 @@ class Estadisticas extends prettyPrinter{
     println("--------------------------\n")
   }
   
-  def enviosPorTipoTransporte(viajes: Set[Viaje]) ={
+  /*def enviosPorTipoTransporte(viajes: Set[Viaje]) ={
     val viajesCamion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Camion")
     val viajesFurgoneta : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Furgoneta")
     val viajesAvion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Avion")
@@ -87,9 +118,9 @@ class Estadisticas extends prettyPrinter{
     println("Furgoneta    :    " + cantidadDeEnvios(viajesFurgoneta))
     println("Avion        :    " + cantidadDeEnvios(viajesAvion))
     println("--------------------------\n")
-  }
+  }*/ //Reemplazado con metodos que implementan orden superior
   
-  def tiempoPromedioPorTransporte(viajes: Set[Viaje]) ={
+  /*def tiempoPromedioPorTransporte(viajes: Set[Viaje]) ={
     val viajesCamion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Camion")
     val viajesFurgoneta : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Furgoneta")
     val viajesAvion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Avion")
@@ -101,9 +132,11 @@ class Estadisticas extends prettyPrinter{
     println("Furgoneta    :   " + tiempoPromedioDeViajes(viajesFurgoneta))
     println("Avion        :   " + tiempoPromedioDeViajes(viajesAvion))
     println("---------------------------\n")
-  }  
+  } */ //Reemplazado con metodos que implementan orden superior
   
-  def costoPromedioPorTransporte(viajes: Set[Viaje]) ={
+  
+   
+  /* def costoPromedioPorTransporte(viajes: Set[Viaje]) ={
     val viajesCamion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Camion")
     val viajesFurgoneta : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Furgoneta")
     val viajesAvion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Avion")
@@ -115,9 +148,10 @@ class Estadisticas extends prettyPrinter{
     println("Furgoneta    :   " + costoPromedioDeViajes(viajesFurgoneta))
     println("Avion        :   " + costoPromedioDeViajes(viajesAvion))
     println("---------------------------\n")
-  }    
-  
-  def gananciaPromedioPorTransporte(viajes: Set[Viaje]) ={
+  } */ //Reemplazado con metodos que implementan orden superior
+     
+   
+  /* def gananciaPromedioPorTransporte(viajes: Set[Viaje]) ={
     val viajesCamion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Camion")
     val viajesFurgoneta : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Furgoneta")
     val viajesAvion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Avion")
@@ -129,7 +163,7 @@ class Estadisticas extends prettyPrinter{
     println("Furgoneta    :   " + gananciaPromedioDeViajes(viajesFurgoneta))
     println("Avion        :   " + gananciaPromedioDeViajes(viajesAvion))
     println("---------------------------\n")
-  }   
+  }  */ //Reemplazado con metodos que implementan orden superior 
   
   def facturacionTotalPorRangoFecha(viajes: Set[Viaje], fechaIni : Date, fechaFin : Date) ={
     val viajesFecha : Set[Viaje] = filtrarPorRangoFecha(viajes, fechaIni, fechaFin)
