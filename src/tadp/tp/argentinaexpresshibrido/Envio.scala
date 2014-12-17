@@ -10,7 +10,7 @@ class Envio (val caracteristicas : Set[ServicioExtra],
 			val fecha :Date)
 	extends CalculadorDistancia{
   
-	val valorRefrigeracion : Int = 0;
+	def valorRefrigeracion : Int = 0;
   
 	def precio():Int = {0}
 	
