@@ -19,22 +19,9 @@ class Envio (val caracteristicas : Set[ServicioExtra],
 	def costoBase():Int = {0}
 	
 	def calcularCostoEnvio () : Double = {
-	  this.costoBase()
-/*	  
-	  // Los aviones que vayan a Casa Central pasado el dia 20, aprovechan para volver a la sucursal de origen
-	  //enviandoles insumos necesarios para el funcionamiento de la empresa, de esta forma el costo de ese envio se
-	  //vera reducido en un 20 %.
-	  
-	  if(this.sucursalDestino.esCasaCentral() && this.pasadoElDia20()){
-	    costoParcial -= costoDeTransporte * 2/10
-	  }
-		
-	  costoParcial
-*/	  
+	  this.costoBase() 
     }
-  
-
-	
+ 
 	def ultimaSemanaDelMes(): Boolean = {
 	  var cal: Calendar = Calendar.getInstance()
 	  cal.setTime(this.fecha)
@@ -56,4 +43,8 @@ class Envio (val caracteristicas : Set[ServicioExtra],
 	def esCargablePor(transporte: Transporte) : Boolean = {
 	  true
 	}
+	
+	def puedeEnviarseCon (envio: Envio): Boolean = {
+	  true
+    }	
 }

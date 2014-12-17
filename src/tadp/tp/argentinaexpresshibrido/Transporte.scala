@@ -42,28 +42,26 @@ abstract class Transporte(val serviciosExtra: Set[ServicioExtra], var sucursalOr
   }
 
   //Funcion utilizada para validar que un transporte pueda cargar un envio
-  def puedeCargar(envio: Envio): Boolean = {
-    var cargable: Boolean = coincideDestino(envio) && entraEnTransporte(envio) && infraestructuraNecesaria(envio) && coincideTipoDeEnvio(envio) 
-    envio match {
-      case envio: Fragil => cargable = cargable && puedeCargarFragiles
-      case envio: Urgente => cargable = cargable && puedeCargarUrgentes
-      case envio: Refrigeracion => cargable = cargable && puedeCargarRefrigerados
-      case _ =>
-    }
-    cargable
+  def puedeCargar(envio: Envio): Boolean = { 
+    coincideDestino(envio) && entraEnTransporte(envio) && infraestructuraNecesaria(envio) && coincideTipoDeEnvio(envio) && 
+    (envio match {
+      case envio: Fragil => puedeCargarFragiles
+      case envio: Urgente => puedeCargarUrgentes
+      case envio: Refrigeracion => puedeCargarRefrigerados
+      case _ => true
+    }) 
   }
 
   def coincideDestino(envio: Envio): Boolean = {
-
-    enviosAsignados.size match {
-      case 0 => true
-      case _ => this.enviosAsignados.forall((e: Envio) => e.sucursalDestino == envio.sucursalDestino);
+    if(this.sinEnviosAsignados)
+      true
+    else {
+      this.enviosAsignados.forall((e:Envio) => e.sucursalDestino==envio.sucursalDestino);
     }
   }
 
   def coincideTipoDeEnvio(envio: Envio) : Boolean ={
-    var clase = envio.getClass()
-    enviosAsignados.forall(_.getClass() == clase)
+    enviosAsignados.forall(_.puedeEnviarseCon(envio))
   }
 
   def entraEnTransporte(envio: Envio): Boolean = {

@@ -16,4 +16,8 @@ extends Envio (caracteristicas, sucursalOrigen, sucursalDestino, volumen, fecha)
 	override def esCargablePor(transporte: Transporte) : Boolean = {
 	  transporte.puedeCargarUrgentes
 	}
+
+	override def puedeEnviarseCon (envio: Envio): Boolean = {
+	  envio.isInstanceOf[Urgente]
+	}		
 }
