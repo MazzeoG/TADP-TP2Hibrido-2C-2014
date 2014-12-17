@@ -80,28 +80,29 @@ def costoDeEnvios = this.enviosAsignados.toList.map((e: Envio) => e.costoBase())
  def sumaCostoRefrigeracion = { (unCosto: Double) => unCosto + costoDeRefrigeracion }
 
  def avionConPeaje = { (unCosto: Double) =>
-    unCosto + (sucursalOrigen.pais == this.sucursalDestino.pais match {
-      case true => 0
-      case _ => costoDeTransporte * impuestoAvion
-    })
-  }
+     if(sucursalOrigen.pais == this.sucursalDestino.pais) 
+	   	{unCosto}
+   else
+    	{unCosto+costoDeTransporte * impuestoAvion}  
+    }
 
  def costoDeTransporte = this.costoTransporte(sucursalOrigen, sucursalDestino)
 
  def costoBaseDeTransporte = (costoDeTransporte + costoDeEnvios)
  
   def sumaCostoRevisionTecnica = { (unCosto: Double) =>
-    unCosto + ((this.sucursalDestino.esCasaCentral() && this.ultimaSemanaDelMes()) match {
-      case true => costoRevisionTecnica(costoDeTransporte)
-      case _ => 0
-    })
+   if(this.sucursalDestino.esCasaCentral() && this.ultimaSemanaDelMes()) 
+	   	{unCosto+costoRevisionTecnica(costoDeTransporte) }
+   else
+    	 {unCosto}  
   }
 
  def sumaReduccionDeInsumos = { (unCosto: Double) =>
-    unCosto - ((pasadoElDia20 && sucursalDestino.esCasaCentral) match {
-      case true => reduccionInsumos(costoDeTransporte)
-      case _ => 0
-    })
+   if(pasadoElDia20 && sucursalDestino.esCasaCentral) 
+	   	{unCosto-reduccionInsumos(costoDeTransporte) }
+   else
+    	 {unCosto}
+   
   }
 
  def multiplicaCostoTransporte = { (unCosto: Double) => unCosto + costoDeTransporte * multiplicador }
