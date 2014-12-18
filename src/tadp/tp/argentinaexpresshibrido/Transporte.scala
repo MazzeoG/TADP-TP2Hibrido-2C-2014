@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.{Calendar, Date}
 
 abstract class Transporte(val serviciosExtra: Set[ServicioExtra], var sucursalOrigen: Sucursal)
-      extends Estadisticas{
+      {
   val volumenDeCarga: Int
   val costoPorKm: Int
   val velocidad: Int
