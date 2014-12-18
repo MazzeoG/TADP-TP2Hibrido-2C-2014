@@ -3,7 +3,11 @@ package tadp.tp.argentinaexpresshibrido
 import java.text.SimpleDateFormat
 import java.util.{Calendar, Date}
 
+class Tupla (nombre:String, cantidad:Int){
+}
+
 class Estadisticas extends prettyPrinter{
+
   def filtrarPorSucursalDestino(viajes: Set[Viaje], sucursalBuscada : Sucursal): Set[Viaje] ={
     viajes.filter(_.sucursalDestino == sucursalBuscada)
   }
@@ -73,7 +77,12 @@ class Estadisticas extends prettyPrinter{
     println("Furgoneta    :    " + f2(viajesFurgoneta))
     println("Avion        :    " + f2(viajesAvion))
     println("--------------------------\n")
-  }
+   // val tuplaCamion=new Tupla("camion", f2(viajesCamion))
+    //val tuplaFurgoneta=new Tupla("furgoneta", f2(viajesFurgoneta))
+    //val tuplaAvion=new Tupla("avion", f2(viajesAvion))
+    //val datos:Set[Tupla]=Set()
+    //datos+tuplaCamion+ tuplaFurgoneta+tuplaAvion
+   }
   
   //Funciones con orden superior
   def enviosPorTipoTransporte(viajes: Set[Viaje]) = {
