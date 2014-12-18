@@ -405,6 +405,14 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
+    val tuplaCamion: Tupla=new Tupla("camion", 1)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 1)
+    val tuplaAvion: Tupla=new Tupla("avion", 1)
+    var datos:Set[Tupla]=Set()
+    datos += tuplaCamion 
+    datos += tuplaFurgoneta 
+    datos += tuplaAvion
+    assertEquals(datos,stats.viajesPorTipoTransporte(sucursalArg.viajesRealizados))
     stats.viajesPorTipoTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
   }
   

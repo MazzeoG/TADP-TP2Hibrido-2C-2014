@@ -66,45 +66,58 @@ class Estadisticas extends prettyPrinter{
   }
   
   // Comparacion entre distintos tipos de Transporte
-  def EstadisticasPorTransporte(viajes: Set[Viaje], f2: Set[Viaje] => _, titulo: String, subt: String) ={
+  def EstadisticasPorTransporte(viajes: Set[Viaje], f2: Set[Viaje] => _, titulo: String, subt: String):Set[Tupla] ={
     
     val viajesCamion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Camion")
     val viajesFurgoneta : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Furgoneta")
     val viajesAvion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Avion")
     
-    println(titulo)
-    println("--------------------------")
-    println("Transporte   -    " + subt)
-    println("Camion       :    " + f2(viajesCamion))
-    println("Furgoneta    :    " + f2(viajesFurgoneta))
-    println("Avion        :    " + f2(viajesAvion))
-    println("--------------------------\n")
+//    println(titulo)
+//    println("--------------------------")
+//    println("Transporte   -    " + subt)
+//    println("Camion       :    " + f2(viajesCamion))
+//    println("Furgoneta    :    " + f2(viajesFurgoneta))
+//    println("Avion        :    " + f2(viajesAvion))
+//    println("--------------------------\n")
     val tuplaCamion: Tupla=new Tupla("camion", f2(viajesCamion))
     val tuplaFurgoneta: Tupla=new Tupla("furgoneta", f2(viajesFurgoneta))
     val tuplaAvion: Tupla=new Tupla("avion", f2(viajesAvion))
     var datos:Set[Tupla]=Set()
-    //datos += tuplaCamion + tuplaFurgoneta + tuplaAvion
+    datos += tuplaCamion 
+    datos += tuplaFurgoneta 
+    datos += tuplaAvion
+    datos
    }
   
   //Ejemplos de distintos filtros posibles
-  def enviosPorTipoTransporte(viajes: Set[Viaje]) = {
-    EstadisticasPorTransporte(viajes,cantidadDeEnvios,"ENVIOS POR TRANSPORTE","Cantidad")
+  def enviosPorTipoTransporte(viajes: Set[Viaje]) :Set[Tupla]= {
+    var datos:Set[Tupla]=Set()
+    datos=EstadisticasPorTransporte(viajes,cantidadDeEnvios,"ENVIOS POR TRANSPORTE","Cantidad")
+    datos
   }
   
-  def tiempoPromedioPorTransporte(viajes: Set[Viaje]) = {
-    EstadisticasPorTransporte(viajes,tiempoPromedioDeViajes,"TIEMPO PROMEDIO DE VIAJE","Tiempo(Hr)")
+  def tiempoPromedioPorTransporte(viajes: Set[Viaje]) :Set[Tupla]= {
+   var datos:Set[Tupla]=Set()
+    datos= EstadisticasPorTransporte(viajes,tiempoPromedioDeViajes,"TIEMPO PROMEDIO DE VIAJE","Tiempo(Hr)")
+    datos
   }
   
-   def costoPromedioPorTransporte(viajes: Set[Viaje]) = {
-    EstadisticasPorTransporte(viajes,costoPromedioDeViajes,"COSTO PROMEDIO DE VIAJE","Costo($)")
-  }
+   def costoPromedioPorTransporte(viajes: Set[Viaje]) :Set[Tupla]= {
+    var datos:Set[Tupla]=Set()
+    datos=EstadisticasPorTransporte(viajes,costoPromedioDeViajes,"COSTO PROMEDIO DE VIAJE","Costo($)")
+    datos
+   }
    
-  def gananciaPromedioPorTransporte(viajes: Set[Viaje]) = {
-    EstadisticasPorTransporte(viajes,gananciaPromedioDeViajes,"GANANCIA PROMEDIO DE VIAJE","Ganancia($)")
+  def gananciaPromedioPorTransporte(viajes: Set[Viaje]):Set[Tupla] = {
+    var datos:Set[Tupla]=Set()
+    datos=EstadisticasPorTransporte(viajes,gananciaPromedioDeViajes,"GANANCIA PROMEDIO DE VIAJE","Ganancia($)")
+    datos
   }
   
-  def viajesPorTipoTransporte(viajes: Set[Viaje]) = {
-    EstadisticasPorTransporte(viajes,cantidadDeViajes,"VIAJES POR TRANSPORTE","Cantidad")
+  def viajesPorTipoTransporte(viajes: Set[Viaje])  :Set[Tupla]= {
+    var datos:Set[Tupla]=Set()
+    datos=EstadisticasPorTransporte(viajes,cantidadDeViajes,"VIAJES POR TRANSPORTE","Cantidad")
+    datos
   }
   
   def EstadisticasPorEnvio(viajes: Set[Viaje], f2: Set[Viaje] => _, titulo: String, subt: String) ={
@@ -122,12 +135,16 @@ class Estadisticas extends prettyPrinter{
     println("Refrigeracion        :    " + f2(viajesRefrigeracion))
     println("Fragil        :    " + f2(viajesFragil))
     println("--------------------------\n")
-    val tuplaNormal: Tupla=new Tupla("camion", f2(viajesNormal))
-    val tuplaUrgente: Tupla=new Tupla("furgoneta", f2(viajesUrgente))
-    val tuplaRefrigeracion: Tupla=new Tupla("avion", f2(viajesRefrigeracion))
-    val tuplaFragil: Tupla=new Tupla("avion", f2(viajesFragil))
+    val tuplaNormal: Tupla=new Tupla("normal", f2(viajesNormal))
+    val tuplaUrgente: Tupla=new Tupla("urgente", f2(viajesUrgente))
+    val tuplaRefrigeracion: Tupla=new Tupla("refrigeracion", f2(viajesRefrigeracion))
+    val tuplaFragil: Tupla=new Tupla("fragil", f2(viajesFragil))
     var datos:Set[Tupla]=Set()
-    //datos += tuplaNormal + tuplaUrgente + tuplaRefrigeracion + tuplaFragil
+    datos += tuplaNormal 
+    datos += tuplaUrgente 
+    datos += tuplaRefrigeracion 
+    datos += tuplaFragil
+    datos
     
   }
   
