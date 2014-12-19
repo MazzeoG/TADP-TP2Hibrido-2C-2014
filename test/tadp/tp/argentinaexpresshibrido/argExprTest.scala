@@ -27,7 +27,7 @@ class TransporteTest {
     var unEnvioChico = new Normal(Set(),sucursalArg,sucursalChi,10,new Date(2014,11,7))
    
     sucursalArg.asignarEnvioATransporte(unEnvioChico)
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvioChico))	  
+    assertTrue(camion1.enviosAsignados.contains(unEnvioChico))	  
   }
   
   @Test
@@ -39,9 +39,9 @@ class TransporteTest {
     sucursalArg.asignarEnvioATransporte(unEnvioNormal)
     sucursalArg.asignarEnvioATransporte(otroEnvioNormal)
     sucursalArg.asignarEnvioATransporte(unEnvioUrgente)
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvioNormal))
-    assertEquals(true,camion1.enviosAsignados.contains(otroEnvioNormal))
-    assertEquals(false,camion1.enviosAsignados.contains(unEnvioUrgente))
+    assertTrue(camion1.enviosAsignados.contains(unEnvioNormal))
+    assertTrue(camion1.enviosAsignados.contains(otroEnvioNormal))
+    assertFalse(camion1.enviosAsignados.contains(unEnvioUrgente))
   }  
 
   
@@ -53,8 +53,8 @@ class TransporteTest {
     
     sucursalArg.asignarEnvioATransporte(unEnvioNormal)
     sucursalArg.asignarEnvioATransporte(otroEnvioNormal)
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvioNormal))
-    assertEquals(false,camion1.enviosAsignados.contains(otroEnvioNormal))    
+    assertTrue(camion1.enviosAsignados.contains(unEnvioNormal))
+    assertFalse(camion1.enviosAsignados.contains(otroEnvioNormal))    
   }
   
  
@@ -66,8 +66,8 @@ class TransporteTest {
     
     sucursalArg.asignarEnvioATransporte(unEnvioNormal)
     sucursalArg.asignarEnvioATransporte(otroEnvioNormal)
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvioNormal))
-    assertEquals(false,camion1.enviosAsignados.contains(otroEnvioNormal))
+    assertTrue(camion1.enviosAsignados.contains(unEnvioNormal))
+    assertFalse(camion1.enviosAsignados.contains(otroEnvioNormal))
   }   
 
    
@@ -82,8 +82,8 @@ class TransporteTest {
     sucursalArg.asignarEnvioATransporte(otroEnvioNormal)
     sucursalArg.asignarEnvioATransporte(unEnvioNormal)
     
-    assertEquals(true,avion1.enviosAsignados.contains(unEnvioNormal))
-    assertEquals(false,avion1.enviosAsignados.contains(otroEnvioNormal))
+    assertTrue(avion1.enviosAsignados.contains(unEnvioNormal))
+    assertFalse(avion1.enviosAsignados.contains(otroEnvioNormal))
   }
   
   @Test
@@ -99,8 +99,8 @@ class TransporteTest {
     sucursalArg.asignarEnvioATransporte(unEnvioAnimal)
     sucursalArg2.asignarEnvioATransporte(otroEnvioAnimal)
 
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvioAnimal))   
-    assertEquals(false,camion2.enviosAsignados.contains(otroEnvioAnimal))
+    assertTrue(camion1.enviosAsignados.contains(unEnvioAnimal))   
+    assertFalse(camion2.enviosAsignados.contains(otroEnvioAnimal))
   }  
 
   @Test
@@ -116,8 +116,8 @@ class TransporteTest {
     sucursalArg.asignarEnvioATransporte(unEnvioPeligroso)
     sucursalArg2.asignarEnvioATransporte(otroEnvioPeligroso)
 
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvioPeligroso))   
-    assertEquals(false,camion2.enviosAsignados.contains(otroEnvioPeligroso))    
+    assertTrue(camion1.enviosAsignados.contains(unEnvioPeligroso))   
+    assertFalse(camion2.enviosAsignados.contains(otroEnvioPeligroso))    
   } 
 
   @Test
@@ -125,12 +125,12 @@ class TransporteTest {
     var unEnvioChico = new Normal(Set(),sucursalArg,sucursalChi,10,new Date(2014,11,7))
    
     sucursalArg.asignarEnvioATransporte(unEnvioChico)
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvioChico))
-    assertEquals(false,sucursalChi.envios.contains(unEnvioChico))
+    assertTrue(camion1.enviosAsignados.contains(unEnvioChico))
+    assertFalse(sucursalChi.envios.contains(unEnvioChico))
     
     sucursalArg.mandarTransporte(camion1)
-    assertEquals(false,camion1.enviosAsignados.contains(unEnvioChico))
-    assertEquals(true,sucursalChi.envios.contains(unEnvioChico))
+    assertFalse(camion1.enviosAsignados.contains(unEnvioChico))
+    assertTrue(sucursalChi.envios.contains(unEnvioChico))
     assertEquals(Set(),camion1.enviosAsignados)
     assertEquals(null,camion1.sucursalDestino)
   }
@@ -140,18 +140,18 @@ class TransporteTest {
     var unEnvioChico = new Normal(Set(),sucursalArg,sucursalChi,10,new Date(2014,11,7))
    
     sucursalArg.asignarEnvioATransporte(unEnvioChico)
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvioChico))
-    assertEquals(false,sucursalChi.envios.contains(unEnvioChico))
+    assertTrue(camion1.enviosAsignados.contains(unEnvioChico))
+    assertFalse(sucursalChi.envios.contains(unEnvioChico))
     
     sucursalArg.mandarTransporte(camion1)
-    assertEquals(false,camion1.enviosAsignados.contains(unEnvioChico))
-    assertEquals(true,sucursalChi.envios.contains(unEnvioChico))
+    assertFalse(camion1.enviosAsignados.contains(unEnvioChico))
+    assertTrue(sucursalChi.envios.contains(unEnvioChico))
     assertEquals(Set(),camion1.enviosAsignados)
     assertEquals(null,camion1.sucursalDestino)
     
     sucursalChi.retirarEnvio(unEnvioChico)
     
-    assertEquals(false,sucursalChi.envios.contains(unEnvioChico))    
+    assertFalse(sucursalChi.envios.contains(unEnvioChico))    
   }
 }
 
@@ -397,9 +397,9 @@ class EstadisticasTest {
     sucursalArg.asignarEnvioATransporte(unEnvio)
     sucursalArg.asignarEnvioATransporte(unEnvio2)
     sucursalArg.asignarEnvioATransporte(otroEnvio)
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvio))
-    assertEquals(true,furgoneta1.enviosAsignados.contains(otroEnvio))
-    assertEquals(true,avion1.enviosAsignados.contains(unEnvio2))
+    assertTrue(camion1.enviosAsignados.contains(unEnvio))
+    assertTrue(furgoneta1.enviosAsignados.contains(otroEnvio))
+    assertTrue(avion1.enviosAsignados.contains(unEnvio2))
         
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
@@ -430,10 +430,10 @@ class EstadisticasTest {
     sucursalArg.asignarEnvioATransporte(unEnvio2)
     sucursalArg.asignarEnvioATransporte(unEnvio3)
     sucursalArg.asignarEnvioATransporte(otroEnvio)
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvio))
-    assertEquals(true,furgoneta1.enviosAsignados.contains(otroEnvio))
-    assertEquals(true,furgoneta1.enviosAsignados.contains(unEnvio3))
-    assertEquals(true,avion1.enviosAsignados.contains(unEnvio2))
+    assertTrue(camion1.enviosAsignados.contains(unEnvio))
+    assertTrue(furgoneta1.enviosAsignados.contains(otroEnvio))
+    assertTrue(furgoneta1.enviosAsignados.contains(unEnvio3))
+    assertTrue(avion1.enviosAsignados.contains(unEnvio2))
         
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
@@ -454,9 +454,9 @@ class EstadisticasTest {
     sucursalArg.asignarEnvioATransporte(unEnvio)
     sucursalArg.asignarEnvioATransporte(unEnvio2)
     sucursalArg.asignarEnvioATransporte(otroEnvio)
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvio))
-    assertEquals(true,furgoneta1.enviosAsignados.contains(otroEnvio))
-    assertEquals(true,avion1.enviosAsignados.contains(unEnvio2))
+    assertTrue(camion1.enviosAsignados.contains(unEnvio))
+    assertTrue(furgoneta1.enviosAsignados.contains(otroEnvio))
+    assertTrue(avion1.enviosAsignados.contains(unEnvio2))
         
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
@@ -480,9 +480,9 @@ class EstadisticasTest {
     sucursalArg.asignarEnvioATransporte(unEnvio)
     sucursalArg.asignarEnvioATransporte(unEnvio2)
     sucursalArg.asignarEnvioATransporte(otroEnvio)
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvio))
-    assertEquals(true,furgoneta1.enviosAsignados.contains(otroEnvio))
-    assertEquals(true,avion1.enviosAsignados.contains(unEnvio2))
+    assertTrue(camion1.enviosAsignados.contains(unEnvio))
+    assertTrue(furgoneta1.enviosAsignados.contains(otroEnvio))
+    assertTrue(avion1.enviosAsignados.contains(unEnvio2))
         
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
@@ -540,9 +540,9 @@ class EstadisticasTest {
     sucursalArg.asignarEnvioATransporte(unEnvio)
     sucursalArg.asignarEnvioATransporte(unEnvio2)
     sucursalArg.asignarEnvioATransporte(otroEnvio)
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvio))
-    assertEquals(true,furgoneta1.enviosAsignados.contains(otroEnvio))
-    assertEquals(true,avion1.enviosAsignados.contains(unEnvio2))
+    assertTrue(camion1.enviosAsignados.contains(unEnvio))
+    assertTrue(furgoneta1.enviosAsignados.contains(otroEnvio))
+    assertTrue(avion1.enviosAsignados.contains(unEnvio2))
         
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
@@ -563,9 +563,9 @@ class EstadisticasTest {
     sucursalArg.asignarEnvioATransporte(unEnvio)
     sucursalArg.asignarEnvioATransporte(unEnvio2)
     sucursalArg.asignarEnvioATransporte(otroEnvio)
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvio))
-    assertEquals(true,furgoneta1.enviosAsignados.contains(otroEnvio))
-    assertEquals(true,avion1.enviosAsignados.contains(unEnvio2))
+    assertTrue(camion1.enviosAsignados.contains(unEnvio))
+    assertTrue(furgoneta1.enviosAsignados.contains(otroEnvio))
+    assertTrue(avion1.enviosAsignados.contains(unEnvio2))
         
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
@@ -585,9 +585,9 @@ class EstadisticasTest {
     sucursalArg.asignarEnvioATransporte(unEnvio)
     sucursalArg.asignarEnvioATransporte(unEnvio2)
     sucursalArg.asignarEnvioATransporte(otroEnvio)
-    assertEquals(true,camion1.enviosAsignados.contains(unEnvio))
-    assertEquals(true,furgoneta1.enviosAsignados.contains(otroEnvio))
-    assertEquals(true,avion1.enviosAsignados.contains(unEnvio2))
+    assertTrue(camion1.enviosAsignados.contains(unEnvio))
+    assertTrue(furgoneta1.enviosAsignados.contains(otroEnvio))
+    assertTrue(avion1.enviosAsignados.contains(unEnvio2))
         
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
