@@ -531,7 +531,7 @@ class EstadisticasTest {
     sucursalChi.mandarTransporte(camion3)
     sucursalChi.mandarTransporte(furgoneta3)
     sucursalChi.mandarTransporte(avion3)
-    
+    //TODO
     //stats.facturacionCompaniaPorSucursal(Set(sucursalArg,sucursalArg2, sucursalChi)) // Imprime estadistica en consola
   } 
   
