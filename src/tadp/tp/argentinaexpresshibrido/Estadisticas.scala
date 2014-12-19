@@ -65,8 +65,14 @@ class Estadisticas extends prettyPrinter{
     viajes.toList.map(_.ganancia).sum
   }
   
+ 
+  //funcion identidad para los filtros
+  def estadisticaIdentidad(viajes: Set[Viaje], comparacion: (Set[Viaje]) => _) ={
+    comparacion(viajes)
+  }
+  
   // Comparacion entre distintos tipos de Transporte
-  def EstadisticasPorTransporte(viajes: Set[Viaje], f2: Set[Viaje] => _, titulo: String, subt: String):Set[Tupla] ={
+  def estadisticasPorTransporte(viajes: Set[Viaje], comparacion: (Set[Viaje]) => _,filtro: (Set[Viaje],Set[Viaje] => _) => _):Set[Tupla] ={
     
     val viajesCamion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Camion")
     val viajesFurgoneta : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Furgoneta")
@@ -79,9 +85,9 @@ class Estadisticas extends prettyPrinter{
 //    println("Furgoneta    :    " + f2(viajesFurgoneta))
 //    println("Avion        :    " + f2(viajesAvion))
 //    println("--------------------------\n")
-    val tuplaCamion: Tupla=new Tupla("camion", f2(viajesCamion))
-    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", f2(viajesFurgoneta))
-    val tuplaAvion: Tupla=new Tupla("avion", f2(viajesAvion))
+    val tuplaCamion: Tupla=new Tupla("camion", filtro(viajesCamion,comparacion))
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", filtro(viajesFurgoneta,comparacion))
+    val tuplaAvion: Tupla=new Tupla("avion", filtro(viajesAvion,comparacion))
     var datos:Set[Tupla]=Set()
     datos += tuplaCamion 
     datos += tuplaFurgoneta 
@@ -92,53 +98,53 @@ class Estadisticas extends prettyPrinter{
   //Ejemplos de distintos filtros posibles
   def enviosPorTipoTransporte(viajes: Set[Viaje]) :Set[Tupla]= {
     var datos:Set[Tupla]=Set()
-    datos=EstadisticasPorTransporte(viajes,cantidadDeEnvios,"ENVIOS POR TRANSPORTE","Cantidad")
+    datos = estadisticasPorTransporte(viajes,cantidadDeEnvios,estadisticaIdentidad) //("ENVIOS POR TRANSPORTE","Cantidad")
     datos
   }
   
   def tiempoPromedioPorTransporte(viajes: Set[Viaje]) :Set[Tupla]= {
    var datos:Set[Tupla]=Set()
-    datos= EstadisticasPorTransporte(viajes,tiempoPromedioDeViajes,"TIEMPO PROMEDIO DE VIAJE","Tiempo(Hr)")
+    datos= estadisticasPorTransporte(viajes,tiempoPromedioDeViajes,estadisticaIdentidad) //("TIEMPO PROMEDIO DE VIAJE","Tiempo(Hr)")
     datos
   }
   
    def costoPromedioPorTransporte(viajes: Set[Viaje]) :Set[Tupla]= {
     var datos:Set[Tupla]=Set()
-    datos=EstadisticasPorTransporte(viajes,costoPromedioDeViajes,"COSTO PROMEDIO DE VIAJE","Costo($)")
+    datos= estadisticasPorTransporte(viajes,costoPromedioDeViajes,estadisticaIdentidad) //("COSTO PROMEDIO DE VIAJE","Costo($)")
     datos
    }
    
   def gananciaPromedioPorTransporte(viajes: Set[Viaje]):Set[Tupla] = {
     var datos:Set[Tupla]=Set()
-    datos=EstadisticasPorTransporte(viajes,gananciaPromedioDeViajes,"GANANCIA PROMEDIO DE VIAJE","Ganancia($)")
+    datos= estadisticasPorTransporte(viajes,gananciaPromedioDeViajes,estadisticaIdentidad) //("GANANCIA PROMEDIO DE VIAJE","Ganancia($)")
     datos
   }
   
   def viajesPorTipoTransporte(viajes: Set[Viaje])  :Set[Tupla]= {
     var datos:Set[Tupla]=Set()
-    datos=EstadisticasPorTransporte(viajes,cantidadDeViajes,"VIAJES POR TRANSPORTE","Cantidad")
+    datos= estadisticasPorTransporte(viajes,cantidadDeViajes,estadisticaIdentidad) //("VIAJES POR TRANSPORTE","Cantidad")
     datos
   }
   
-  def EstadisticasPorEnvio(viajes: Set[Viaje], f2: Set[Viaje] => _, titulo: String, subt: String) ={
+  def estadisticasPorEnvio(viajes: Set[Viaje], comparacion: Set[Viaje] => _) ={
     
     val viajesNormal : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Normal")
     val viajesUrgente : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Urgente")
     val viajesRefrigeracion : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Refrigeracion")
     val viajesFragil : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Fragil")
     
-    println(titulo)
+    /*println(titulo)
     println("--------------------------")
     println("Envio   -    " + subt)
     println("Normal       :    " + f2(viajesNormal))
     println("Urgente    :    " + f2(viajesUrgente))
     println("Refrigeracion        :    " + f2(viajesRefrigeracion))
     println("Fragil        :    " + f2(viajesFragil))
-    println("--------------------------\n")
-    val tuplaNormal: Tupla=new Tupla("normal", f2(viajesNormal))
-    val tuplaUrgente: Tupla=new Tupla("urgente", f2(viajesUrgente))
-    val tuplaRefrigeracion: Tupla=new Tupla("refrigeracion", f2(viajesRefrigeracion))
-    val tuplaFragil: Tupla=new Tupla("fragil", f2(viajesFragil))
+    println("--------------------------\n")*/
+    val tuplaNormal: Tupla=new Tupla("camion", comparacion(viajesNormal))
+    val tuplaUrgente: Tupla=new Tupla("furgoneta", comparacion(viajesUrgente))
+    val tuplaRefrigeracion: Tupla=new Tupla("avion", comparacion(viajesRefrigeracion))
+    val tuplaFragil: Tupla=new Tupla("avion", comparacion(viajesFragil))
     var datos:Set[Tupla]=Set()
     datos += tuplaNormal 
     datos += tuplaUrgente 
@@ -149,10 +155,15 @@ class Estadisticas extends prettyPrinter{
   }
   
   // Comparacion entre distintas Sucursales
-  def EstadisticasPorSucursal(sucursales : Set[Sucursal],viajes: Set[Viaje], f2: Set[Viaje] => _) ={
+  // Comparacion entre distintas Sucursales
+  def estadisticasPorSucursal(sucursales : Set[Sucursal], filtro: (Set[Viaje],Set[Viaje] => _) => _, comparacion: Set [Viaje] => _) ={
     sucursales.foreach({s =>
-		f2(s.viajesRealizados)
+		filtro(s.viajesRealizados,comparacion)
     })
+  }
+  
+  def facturacionCompaniaPorSucursal(sucursales : Set[Sucursal]) = {
+    estadisticasPorSucursal(sucursales,estadisticaIdentidad,calcularFacturacionTotal)
   }
   /*def viajesPorTipoTransporte(viajes: Set[Viaje]) ={
     val viajesCamion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Camion")
@@ -246,17 +257,6 @@ class Estadisticas extends prettyPrinter{
     println("Fecha       : " + printDate(fecha))
     println("Facturacion : " + calcularFacturacionTotal(viajesFecha))
     println("-----------------------\n")
-  }
-  
-  def facturacionCompaniaPorSucursal(sucursales : Set[Sucursal]) = {
-	
-    println("FACTURACION TOTAL POR SUCURSAL")
-	println("-----------------------------")
-	println("Sucursal    -     Facturacion")
-    sucursales.foreach({s =>
-		println(s.toString() + " -> " + calcularFacturacionTotal(s.viajesRealizados))
-	})
-	println("-----------------------------\n")
   }
   
 }
