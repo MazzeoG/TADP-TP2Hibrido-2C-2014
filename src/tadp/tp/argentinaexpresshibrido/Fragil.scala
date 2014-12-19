@@ -17,7 +17,10 @@ extends Envio (caracteristicas, sucursalOrigen, sucursalDestino, volumen, fecha)
 	  transporte.puedeCargarFragiles
   }
   
-  override def puedeEnviarseCon (envio: Envio): Boolean = {
-    envio.isInstanceOf[Fragil]
-  } 
+  override def puedeEnviarseCon (envio: Envio): Boolean =  envio.puedeEnviarseConFragiles
+  
+  override def puedeEnviarseConFragiles : Boolean = true
+  override def puedeEnviarseConNormal : Boolean = false
+  override def puedeEnviarseConRefrigeracion : Boolean = false
+  override def puedeEnviarseConUrgentes : Boolean = false
 }

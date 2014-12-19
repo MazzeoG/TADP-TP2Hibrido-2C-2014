@@ -44,7 +44,10 @@ class Envio (val caracteristicas : Set[ServicioExtra],
 	  true
 	}
 	
-	def puedeEnviarseCon (envio: Envio): Boolean = {
-	  true
-    }	
+	def puedeEnviarseCon (envio :Envio): Boolean = true
+	
+	def puedeEnviarseConFragiles : Boolean = true
+	def puedeEnviarseConNormal : Boolean = true
+	def puedeEnviarseConRefrigeracion : Boolean = true
+	def puedeEnviarseConUrgentes : Boolean = true
 }

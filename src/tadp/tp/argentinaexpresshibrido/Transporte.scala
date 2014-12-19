@@ -61,7 +61,7 @@ abstract class Transporte(val serviciosExtra: Set[ServicioExtra], var sucursalOr
   }
 
   def coincideTipoDeEnvio(envio: Envio) : Boolean ={
-    enviosAsignados.forall(_.puedeEnviarseCon(envio))
+    enviosAsignados.forall(envio.puedeEnviarseCon(_))
   }
 
   def entraEnTransporte(envio: Envio): Boolean = {

@@ -12,7 +12,10 @@ extends Envio (caracteristicas, sucursalOrigen, sucursalDestino, volumen, fecha)
 	override def precio()={80}
 	override def costoBase()={10}
 	
-  override def puedeEnviarseCon (envio: Envio): Boolean = {
-    envio.isInstanceOf[Normal]
-  }		
+  override def puedeEnviarseCon (envio: Envio): Boolean =  envio.puedeEnviarseConNormal
+  
+  override def puedeEnviarseConFragiles : Boolean = false
+  override def puedeEnviarseConNormal : Boolean = true
+  override def puedeEnviarseConRefrigeracion : Boolean = false
+  override def puedeEnviarseConUrgentes : Boolean = false
 }
