@@ -261,7 +261,7 @@ class Estadisticas extends prettyPrinter{
     println("---------------------------\n")
   }  */ //Reemplazado con metodos que implementan orden superior 
   
-  def facturacionTotalPorRangoFecha(viajes: Set[Viaje], fechaIni : Date, fechaFin : Date) ={
+  /*def facturacionTotalPorRangoFecha(viajes: Set[Viaje], fechaIni : Date, fechaFin : Date) ={
     val viajesFecha : Set[Viaje] = filtrarPorRangoFecha(viajes, fechaIni, fechaFin)
     
     println("FACTURACION POR RANGO DE FECHA")
@@ -270,7 +270,7 @@ class Estadisticas extends prettyPrinter{
     println("Fecha Fin   : " + printDate(fechaFin))
     println("Facturacion : " + calcularFacturacionTotal(viajesFecha))
     println("-----------------------\n")
-  }
+  }*/
   
   /*def facturacionTotalPorFecha(viajes: Set[Viaje], fecha : Date) ={
     val viajesFecha : Set[Viaje] = filtrarPorFecha(viajes, fecha)
