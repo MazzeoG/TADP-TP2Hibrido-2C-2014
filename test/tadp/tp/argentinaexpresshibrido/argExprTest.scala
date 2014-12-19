@@ -381,13 +381,13 @@ class EstadisticasTest {
   @Before	
   	val sucursalArg = new Sucursal(Set(),1000,"Argentina")
   	val sucursalChi = new Sucursal(Set(),500,"Chile")
+  	val sucursalArg2 = new Sucursal(Set(),1000,"Argentina")  
     val camion1 = new Camion(Set(), sucursalArg)
   	val stats = new Estadisticas
   	
   @Test
   def `Cantidad de viajes por transporte` = {
        
-    val sucursalArg2 = new Sucursal(Set(),1000,"Argentina")  
     val furgoneta1 = new Furgoneta(Set(), sucursalArg)
     val avion1 = new Avion(Set(),sucursalArg)
     var unEnvio = new Normal(Set(),sucursalArg,sucursalChi,40,new Date(2014,11,7))
@@ -419,7 +419,6 @@ class EstadisticasTest {
   
   @Test
   def `Cantidad de envios por transporte` = {
-    val sucursalArg2 = new Sucursal(Set(),1000,"Argentina")  
     val furgoneta1 = new Furgoneta(Set(), sucursalArg)
     val avion1 = new Avion(Set(),sucursalArg)
     var unEnvio = new Normal(Set(),sucursalArg,sucursalChi,45,new Date(2014,11,7))
@@ -454,7 +453,6 @@ class EstadisticasTest {
   
   @Test
   def `Facturacion Total Por Rango de Fecha` = {
-    val sucursalArg2 = new Sucursal(Set(),1000,"Argentina")  
     val furgoneta1 = new Furgoneta(Set(), sucursalArg)
     val avion1 = new Avion(Set(),sucursalArg)
     var unEnvio = new Normal(Set(),sucursalArg,sucursalChi,40,new Date(2014,11,7))
@@ -481,7 +479,6 @@ class EstadisticasTest {
   @Test
   def `Facturacion Total de una fecha` = {
        
-    val sucursalArg2 = new Sucursal(Set(),1000,"Argentina")  
     val furgoneta1 = new Furgoneta(Set(), sucursalArg)
     val avion1 = new Avion(Set(),sucursalArg)
     var unEnvio = new Normal(Set(),sucursalArg,sucursalChi,40,new Date(2014,11,7))
@@ -504,7 +501,6 @@ class EstadisticasTest {
 
   @Test
   def `Facturacion Total Por Sucursal` = {
-    val sucursalArg2 = new Sucursal(Set(),1000,"Argentina")  
     val furgoneta1 = new Furgoneta(Set(), sucursalArg)
     val avion1 = new Avion(Set(),sucursalArg)
     val camion2 = new Camion(Set(), sucursalArg2)
@@ -541,8 +537,7 @@ class EstadisticasTest {
   
   @Test
   def `Tiempo promedio por transporte` = {
-    val sucursalArg2 = new Sucursal(Set(),1000,"Argentina")  
-    val furgoneta1 = new Furgoneta(Set(), sucursalArg)
+     val furgoneta1 = new Furgoneta(Set(), sucursalArg)
     val avion1 = new Avion(Set(),sucursalArg)
     var unEnvio = new Normal(Set(),sucursalArg,sucursalChi,40,new Date(2014,11,7))
     var otroEnvio = new Normal(Set(),sucursalArg,sucursalArg2,8,new Date(2014,11,14))
@@ -572,7 +567,6 @@ class EstadisticasTest {
   
  @Test
   def `Ganancia promedio por transporte` = {
-    val sucursalArg2 = new Sucursal(Set(),1000,"Argentina")  
     val furgoneta1 = new Furgoneta(Set(), sucursalArg)
     val avion1 = new Avion(Set(),sucursalArg)
     var unEnvio = new Normal(Set(),sucursalArg,sucursalChi,40,new Date(2014,11,7))
@@ -603,7 +597,6 @@ class EstadisticasTest {
  
   @Test
   def `Costo promedio por transporte` = {
-    val sucursalArg2 = new Sucursal(Set(),1000,"Argentina")  
     val furgoneta1 = new Furgoneta(Set(), sucursalArg)
     val avion1 = new Avion(Set(),sucursalArg)
     var unEnvio = new Normal(Set(),sucursalArg,sucursalChi,40,new Date(2014,11,7))
@@ -632,4 +625,114 @@ class EstadisticasTest {
     datos=stats.costoPromedioPorTransporte(sucursalArg.viajesRealizados)
     assertEquals(datos,expec)
      }  
+  
+  
+  @Test
+  def `estadisticas por sucursal sin rango de fechas` = {
+    val furgoneta1 = new Furgoneta(Set(), sucursalArg)
+    val avion1 = new Avion(Set(),sucursalArg)
+    var unEnvio = new Normal(Set(),sucursalArg,sucursalChi,40,new Date(2014,11,7))
+    var otroEnvio = new Normal(Set(),sucursalArg,sucursalArg2,8,new Date(2014,11,14))
+    var unEnvio2 = new Normal(Set(),sucursalArg,sucursalChi,100,new Date(2014,11,21)) 
+    
+    var sucursales:Set[Sucursal]=Set()
+    sucursales+=sucursalArg
+    sucursales+=sucursalArg2
+    sucursales+=sucursalChi 
+    sucursalArg.asignarEnvioATransporte(unEnvio)
+    sucursalArg.asignarEnvioATransporte(unEnvio2)
+    sucursalArg.asignarEnvioATransporte(otroEnvio)
+    assertTrue(camion1.enviosAsignados.contains(unEnvio))
+    assertTrue(furgoneta1.enviosAsignados.contains(otroEnvio))
+    assertTrue(avion1.enviosAsignados.contains(unEnvio2))
+        
+    sucursalArg.mandarTransporte(camion1)
+    sucursalArg.mandarTransporte(furgoneta1)
+    sucursalArg.mandarTransporte(avion1)
+    
+    val tuplaCamion: Tupla=new Tupla("camion", 150070.0.toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 20010.0.toString)
+    val tuplaAvion: Tupla=new Tupla("avion", 825010.0.toString)
+    var expec:Set[Tupla]=Set()
+    expec+=tuplaCamion
+    expec+=tuplaFurgoneta
+    expec+=tuplaAvion
+    var datos:Set[Tupla]=Set()
+    datos=stats.estadisticasPorSucursal(sucursales,estadisticasPorTransporteSinFiltros(sucursalArg.viajesRealizados,),sinFiltroFechas,new Date, new Date)
+    assertEquals(datos,expec)
+     } 
+  
+    @Test
+  def `estadisticas por sucursal con rango de fechas` = {
+    val furgoneta1 = new Furgoneta(Set(), sucursalArg)
+    val avion1 = new Avion(Set(),sucursalArg)
+    var unEnvio = new Normal(Set(),sucursalArg,sucursalChi,40,new Date(2014,11,7))
+    var otroEnvio = new Normal(Set(),sucursalArg,sucursalArg2,8,new Date(2014,11,14))
+    var unEnvio2 = new Normal(Set(),sucursalArg,sucursalChi,100,new Date(2014,11,21)) 
+    
+    var sucursales:Set[Sucursal]=Set()
+    sucursales+=sucursalArg
+    sucursales+=sucursalArg2
+    sucursales+=sucursalChi 
+    sucursalArg.asignarEnvioATransporte(unEnvio)
+    sucursalArg.asignarEnvioATransporte(unEnvio2)
+    sucursalArg.asignarEnvioATransporte(otroEnvio)
+    assertTrue(camion1.enviosAsignados.contains(unEnvio))
+    assertTrue(furgoneta1.enviosAsignados.contains(otroEnvio))
+    assertTrue(avion1.enviosAsignados.contains(unEnvio2))
+        
+    sucursalArg.mandarTransporte(camion1)
+    sucursalArg.mandarTransporte(furgoneta1)
+    sucursalArg.mandarTransporte(avion1)
+    
+    val tuplaCamion: Tupla=new Tupla("camion", 150070.0.toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 20010.0.toString)
+    val tuplaAvion: Tupla=new Tupla("avion", 825010.0.toString)
+    var expec:Set[Tupla]=Set()
+    expec+=tuplaCamion
+    expec+=tuplaFurgoneta
+    expec+=tuplaAvion
+    
+    val Date1:Date=new Date(2014,11,7)
+    val Date2:Date=new Date(2014,11,15)
+    var datos:Set[Tupla]=Set()
+    datos=stats.estadisticasPorSucursal(sucursales,estadisticasPorTransporteSinFiltros,filtrarPorRangoFecha,Date1,Date2)
+    assertEquals(datos,expec)
+     } 
+    
+      @Test
+  def `estadisticas por transporte sin rango de fechas` = {
+    val furgoneta1 = new Furgoneta(Set(), sucursalArg)
+    val avion1 = new Avion(Set(),sucursalArg)
+    var unEnvio = new Normal(Set(),sucursalArg,sucursalChi,40,new Date(2014,11,7))
+    var otroEnvio = new Normal(Set(),sucursalArg,sucursalArg2,8,new Date(2014,11,14))
+    var unEnvio2 = new Normal(Set(),sucursalArg,sucursalChi,100,new Date(2014,11,21)) 
+    
+    var sucursales:Set[Sucursal]=Set()
+    sucursales+=sucursalArg
+    sucursales+=sucursalArg2
+    sucursales+=sucursalChi 
+    sucursalArg.asignarEnvioATransporte(unEnvio)
+    sucursalArg.asignarEnvioATransporte(unEnvio2)
+    sucursalArg.asignarEnvioATransporte(otroEnvio)
+    assertTrue(camion1.enviosAsignados.contains(unEnvio))
+    assertTrue(furgoneta1.enviosAsignados.contains(otroEnvio))
+    assertTrue(avion1.enviosAsignados.contains(unEnvio2))
+        
+    sucursalArg.mandarTransporte(camion1)
+    sucursalArg.mandarTransporte(furgoneta1)
+    sucursalArg.mandarTransporte(avion1)
+    
+    val tuplaCamion: Tupla=new Tupla("camion", 150070.0.toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 20010.0.toString)
+    val tuplaAvion: Tupla=new Tupla("avion", 825010.0.toString)
+    var expec:Set[Tupla]=Set()
+    expec+=tuplaCamion
+    expec+=tuplaFurgoneta
+    expec+=tuplaAvion
+    var datos:Set[Tupla]=Set()
+    datos=stats.estadisticasPorTransporte(sucursalArg.viajesRealizados,cantidadDeEnvios,estadisticasPorEnvioSinFiltros,sinFiltroFechas,new Date,new Date)
+    assertEquals(datos,expec)
+     } 
+
 }
