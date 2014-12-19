@@ -15,11 +15,11 @@ class Camion(override val serviciosExtra: Set[ServicioExtra], sucursalOrigen: Su
   def vDeEvioSobreCarga = (this.volumenEnvios.toDouble / this.volumenDeCarga.toDouble)
     
   override def multiplicador(): Double = {
-    ((this.volumenDeCarga * volOcupadoMulti >= this.volumenEnvios)
-      && !(sucursalOrigen.esCasaCentral || sucursalDestino.esCasaCentral)) match {
-        case true => 1 + vDeEvioSobreCarga
-        case _ => 1
-      }
+    if ((this.volumenDeCarga * volOcupadoMulti >= this.volumenEnvios) && 
+        !(sucursalOrigen.esCasaCentral || sucursalDestino.esCasaCentral))
+    		1 + vDeEvioSobreCarga
+    	else
+    		1
   }
 
 
@@ -31,9 +31,9 @@ class Camion(override val serviciosExtra: Set[ServicioExtra], sucursalOrigen: Su
   def  sumaVsobreCarga = 3 * enviosAsignados.filter(_.isInstanceOf[Urgente]).toList.map(_.volumen).sum / volumenDeCarga
 
   override def costoSustanciasPeligrosas(): Double = {
-    enviosAsignados.exists(_.caracteristicas.exists(_.soyInfraestructuraSustancias)) match {
-      case false => 0
-      case true => 600 + sumaVsobreCarga
-    }
+    if(enviosAsignados.exists(_.caracteristicas.exists(_.soyInfraestructuraSustancias)))
+      600 + sumaVsobreCarga
+      else
+        0
   }
 }
