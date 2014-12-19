@@ -166,10 +166,10 @@ class Estadisticas extends prettyPrinter{
     val viajesRefrigeracion : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Refrigeracion")
     val viajesFragil : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Fragil")
     
-    val tuplaNormal: Tupla=new Tupla("camion", comparacion(viajesNormal))
-    val tuplaUrgente: Tupla=new Tupla("furgoneta", comparacion(viajesUrgente))
-    val tuplaRefrigeracion: Tupla=new Tupla("avion", comparacion(viajesRefrigeracion))
-    val tuplaFragil: Tupla=new Tupla("avion", comparacion(viajesFragil))
+    val tuplaNormal: Tupla=new Tupla("Normal", comparacion(viajesNormal))
+    val tuplaUrgente: Tupla=new Tupla("Urgente", comparacion(viajesUrgente))
+    val tuplaRefrigeracion: Tupla=new Tupla("Refrigeracion", comparacion(viajesRefrigeracion))
+    val tuplaFragil: Tupla=new Tupla("Fragil", comparacion(viajesFragil))
     var datos:Set[Tupla]=Set()
     datos += tuplaNormal 
     datos += tuplaUrgente 
@@ -214,6 +214,7 @@ class Estadisticas extends prettyPrinter{
       var viajesSucursal = s.viajesRealizados 
       datos = datos ++ filtro(viajesSucursal,comparacion,filtroFecha,fechaIni,fechaFin)
       datos2 += new Tupla2(s.pais,datos)
+      datos = Set()
     })
     datos2
   }
