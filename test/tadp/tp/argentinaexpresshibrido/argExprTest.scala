@@ -609,10 +609,8 @@ class EstadisticasTest {
     unSet+=new Tupla("sin filtro", 331696.6666666667.toString)
     
     var unSet1: Set[Tupla]=Set()
-    unSet1+=new Tupla("sin filtro", 331696.6666666667.toString)
-   unSet1+=new Tupla("sin filtro", 0.toString)
+    unSet1+=new Tupla("sin filtro", 0.toString)
     var unSet2: Set[Tupla]=Set()
-    unSet2+=new Tupla("sin filtro", 331696.6666666667.toString)
     unSet2+=new Tupla("sin filtro", 0.toString)
    
     
@@ -656,10 +654,8 @@ class EstadisticasTest {
     unSet+=new Tupla("sin filtro", 20010.0.toString)
     
     var unSet1: Set[Tupla]=Set()
-    unSet1+=new Tupla("sin filtro",  20010.0.toString)
-   unSet1+=new Tupla("sin filtro", 0.toString)
+    unSet1+=new Tupla("sin filtro", 0.toString)
     var unSet2: Set[Tupla]=Set()
-    unSet2+=new Tupla("sin filtro",  20010.0.toString)
     unSet2+=new Tupla("sin filtro", 0.toString)
    
     
@@ -682,7 +678,7 @@ class EstadisticasTest {
     val furgoneta1 = new Furgoneta(Set(), sucursalArg)
     val avion1 = new Avion(Set(),sucursalArg)
     var unEnvio = new Normal(Set(),sucursalArg,sucursalChi,40,new Date(2014,11,7))
-    var otroEnvio = new Normal(Set(),sucursalArg,sucursalArg2,8,new Date(2014,11,14))
+    var otroEnvio = new Urgente(Set(),sucursalArg,sucursalArg2,8,new Date(2014,11,14))
     var unEnvio2 = new Normal(Set(),sucursalArg,sucursalChi,100,new Date(2014,11,21)) 
     
     var sucursales:Set[Sucursal]=Set()
@@ -701,17 +697,20 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(avion1)
     
     var unSet: Set[Tupla]=Set()
-    unSet+=new Tupla("camion", 1.toString)
-    unSet+=new Tupla("furgoneta", 0.toString)
-    unSet+=new Tupla("avion", 0.toString)
+    unSet+=new Tupla("Normal", 1.toString)
+    unSet+=new Tupla("Urgente", 0.toString)
+    unSet+=new Tupla("Refrigeracion", 0.toString)
+    unSet+=new Tupla("Fragil", 0.toString)
     var unSet1: Set[Tupla]=Set()
-    unSet1+=new Tupla("camion", 1.toString)
-    unSet1+=new Tupla("furgoneta", 0.toString)
-    unSet1+=new Tupla("avion", 0.toString)
+    unSet1+=new Tupla("Normal", 0.toString)
+    unSet1+=new Tupla("Urgente", 1.toString)
+    unSet1+=new Tupla("Refrigeracion", 0.toString)
+    unSet1+=new Tupla("Fragil", 0.toString)
     var unSet2: Set[Tupla]=Set()
-    unSet2+=new Tupla("camion", 1.toString)
-    unSet2+=new Tupla("furgoneta", 0.toString)
-    unSet2+=new Tupla("avion", 0.toString)
+     unSet2+=new Tupla("Normal", 1.toString)
+    unSet2+=new Tupla("Urgente", 0.toString)
+    unSet2+=new Tupla("Refrigeracion", 0.toString)
+    unSet2+=new Tupla("Fragil", 0.toString)
    
     
     val tuplaSucursalArg: Tupla=new Tupla("camion", unSet.toString)
