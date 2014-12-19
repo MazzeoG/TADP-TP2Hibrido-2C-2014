@@ -404,16 +404,24 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
+    var unSet: Set[Tupla]=Set()
+    unSet+=new Tupla("sin filtro", 1.toString)
+    val tuplaCamion: Tupla=new Tupla("camion", unSet.toString)
+    var unSet1: Set[Tupla]=Set()
+    unSet1+=new Tupla("sin filtro", 1.toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", unSet1.toString)
+    var unSet2: Set[Tupla]=Set()
+    unSet2+=new Tupla("sin filtro", 1.toString)
+    val tuplaAvion: Tupla=new Tupla("avion", unSet2.toString)
     
-    val tuplaCamion: Tupla=new Tupla("camion", 1.toString)
-    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 1.toString)
-    val tuplaAvion: Tupla=new Tupla("avion", 1.toString)
     var expec:Set[Tupla]=Set()
     expec+=tuplaCamion
     expec+=tuplaFurgoneta
     expec+=tuplaAvion
     var datos:Set[Tupla]=Set()
     datos=stats.viajesPorTipoTransporte(sucursalArg.viajesRealizados)
+    println(datos)
+    println(datos.toString)
     assertEquals(datos,expec)
     }
   
@@ -438,9 +446,17 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
-    val tuplaCamion: Tupla=new Tupla("camion", 1.toString)
-    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 2.toString)
-    val tuplaAvion: Tupla=new Tupla("avion", 1.toString)
+    
+     var unSet: Set[Tupla]=Set()
+    unSet+=new Tupla("sin filtro", 1.toString)
+    val tuplaCamion: Tupla=new Tupla("camion", unSet.toString)
+    var unSet1: Set[Tupla]=Set()
+    unSet1+=new Tupla("sin filtro", 2.toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", unSet1.toString)
+    var unSet2: Set[Tupla]=Set()
+    unSet2+=new Tupla("sin filtro", 1.toString)
+    val tuplaAvion: Tupla=new Tupla("avion", unSet2.toString)
+    
     var expec:Set[Tupla]=Set()
     expec+=tuplaCamion
     expec+=tuplaFurgoneta
@@ -553,10 +569,18 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
-    val tuplaCamion: Tupla=new Tupla("camion", 25.0.toString)
-    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 6.25.toString)
-    val tuplaAvion: Tupla=new Tupla("avion", 3.0.toString)
-    var expec:Set[Tupla]=Set()
+    
+     var unSet: Set[Tupla]=Set()
+    unSet+=new Tupla("sin filtro", 25.0.toString)
+    val tuplaCamion: Tupla=new Tupla("camion", unSet.toString)
+    var unSet1: Set[Tupla]=Set()
+    unSet1+=new Tupla("sin filtro", 6.25.toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", unSet1.toString)
+    var unSet2: Set[Tupla]=Set()
+    unSet2+=new Tupla("sin filtro", 3.0.toString)
+    val tuplaAvion: Tupla=new Tupla("avion", unSet2.toString)
+     
+      var expec:Set[Tupla]=Set()
     expec+=tuplaCamion
     expec+=tuplaFurgoneta
     expec+=tuplaAvion
@@ -583,9 +607,15 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
-    val tuplaCamion: Tupla=new Tupla("camion", -149990.0.toString)
-    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", -19930.0.toString)
-    val tuplaAvion: Tupla=new Tupla("avion", -824930.0.toString)
+    var unSet: Set[Tupla]=Set()
+    unSet+=new Tupla("sin filtro", -149990.0.toString)
+    val tuplaCamion: Tupla=new Tupla("camion", unSet.toString)
+    var unSet1: Set[Tupla]=Set()
+    unSet1+=new Tupla("sin filtro", -19930.0.toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", unSet1.toString)
+    var unSet2: Set[Tupla]=Set()
+    unSet2+=new Tupla("sin filtro", -824930.0.toString)
+    val tuplaAvion: Tupla=new Tupla("avion", unSet2.toString)
     var expec:Set[Tupla]=Set()
     expec+=tuplaCamion
     expec+=tuplaFurgoneta
@@ -614,9 +644,19 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
-    val tuplaCamion: Tupla=new Tupla("camion", 150070.0.toString)
-    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 20010.0.toString)
-    val tuplaAvion: Tupla=new Tupla("avion", 825010.0.toString)
+    var unSet: Set[Tupla]=Set()
+    unSet+=new Tupla("sin filtro", 150070.0.toString)
+    
+    var unSet1: Set[Tupla]=Set()
+    unSet1+=new Tupla("sin filtro", 20010.0.toString)
+   
+    var unSet2: Set[Tupla]=Set()
+    unSet2+=new Tupla("sin filtro", 825010.0.toString)
+   
+    
+    val tuplaCamion: Tupla=new Tupla("camion", unSet.toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", unSet1.toString)
+    val tuplaAvion: Tupla=new Tupla("avion", unSet2.toString)
     var expec:Set[Tupla]=Set()
     expec+=tuplaCamion
     expec+=tuplaFurgoneta
@@ -649,16 +689,27 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
+    var unSet: Set[Tupla]=Set()
+    unSet+=new Tupla("sin filtro", 331696.6666666667.toString)
     
-    val tuplaCamion: Tupla=new Tupla("camion", 150070.0.toString)
-    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 20010.0.toString)
-    val tuplaAvion: Tupla=new Tupla("avion", 825010.0.toString)
-    var expec:Set[Tupla]=Set()
-    expec+=tuplaCamion
-    expec+=tuplaFurgoneta
-    expec+=tuplaAvion
-    var datos:Set[Tupla]=Set()
-    datos=stats.estadisticasPorSucursal(sucursales,estadisticasPorTransporteSinFiltros(sucursalArg.viajesRealizados,),sinFiltroFechas,new Date, new Date)
+    var unSet1: Set[Tupla]=Set()
+    unSet1+=new Tupla("sin filtro", 331696.6666666667.toString)
+   unSet1+=new Tupla("sin filtro", 0.toString)
+    var unSet2: Set[Tupla]=Set()
+    unSet2+=new Tupla("sin filtro", 331696.6666666667.toString)
+    unSet2+=new Tupla("sin filtro", 0.toString)
+   
+    
+    val tuplaSucursalArg: Tupla2=new Tupla2("Argentina", unSet)
+    val tuplaSucursalArg2: Tupla2=new Tupla2("Argentina", unSet1)
+    val tuplaSucursalChi: Tupla2=new Tupla2("Chile", unSet2)
+    var expec:Set[Tupla2]=Set()
+    expec+=tuplaSucursalArg
+    expec+=tuplaSucursalArg2
+    expec+=tuplaSucursalChi
+      
+    var datos:Set[Tupla2]=Set()
+    datos=stats.estadisticasPorSucursal(sucursales,stats.estadisticaIdentidad,stats.costoPromedioDeViajes,stats.sinFiltroFechas,new Date, new Date) 
     assertEquals(datos,expec)
      } 
   
@@ -685,18 +736,28 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
-    val tuplaCamion: Tupla=new Tupla("camion", 150070.0.toString)
-    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 20010.0.toString)
-    val tuplaAvion: Tupla=new Tupla("avion", 825010.0.toString)
-    var expec:Set[Tupla]=Set()
-    expec+=tuplaCamion
-    expec+=tuplaFurgoneta
-    expec+=tuplaAvion
+    var unSet: Set[Tupla]=Set()
+    unSet+=new Tupla("sin filtro", 20010.0.toString)
     
+    var unSet1: Set[Tupla]=Set()
+    unSet1+=new Tupla("sin filtro",  20010.0.toString)
+   unSet1+=new Tupla("sin filtro", 0.toString)
+    var unSet2: Set[Tupla]=Set()
+    unSet2+=new Tupla("sin filtro",  20010.0.toString)
+    unSet2+=new Tupla("sin filtro", 0.toString)
+   
+    
+    val tuplaSucursalArg: Tupla2=new Tupla2("Argentina", unSet)
+    val tuplaSucursalArg2: Tupla2=new Tupla2("Argentina", unSet1)
+    val tuplaSucursalChi: Tupla2=new Tupla2("Chile", unSet2)
+    var expec:Set[Tupla2]=Set()
+    expec+=tuplaSucursalArg
+    expec+=tuplaSucursalArg2
+    expec+=tuplaSucursalChi
     val Date1:Date=new Date(2014,11,7)
     val Date2:Date=new Date(2014,11,15)
-    var datos:Set[Tupla]=Set()
-    datos=stats.estadisticasPorSucursal(sucursales,estadisticasPorTransporteSinFiltros,filtrarPorRangoFecha,Date1,Date2)
+    var datos:Set[Tupla2]=Set()
+    datos=stats.estadisticasPorSucursal(sucursales,stats.estadisticaIdentidad,stats.costoPromedioDeViajes,stats.filtrarPorRangoFecha,Date1,Date2)
     assertEquals(datos,expec)
      } 
     
@@ -723,15 +784,30 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
-    val tuplaCamion: Tupla=new Tupla("camion", 150070.0.toString)
-    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 20010.0.toString)
-    val tuplaAvion: Tupla=new Tupla("avion", 825010.0.toString)
+    var unSet: Set[Tupla]=Set()
+    unSet+=new Tupla("camion", 1.toString)
+    unSet+=new Tupla("furgoneta", 0.toString)
+    unSet+=new Tupla("avion", 0.toString)
+    var unSet1: Set[Tupla]=Set()
+    unSet1+=new Tupla("camion", 1.toString)
+    unSet1+=new Tupla("furgoneta", 0.toString)
+    unSet1+=new Tupla("avion", 0.toString)
+    var unSet2: Set[Tupla]=Set()
+    unSet2+=new Tupla("camion", 1.toString)
+    unSet2+=new Tupla("furgoneta", 0.toString)
+    unSet2+=new Tupla("avion", 0.toString)
+   
+    
+    val tuplaSucursalArg: Tupla=new Tupla("camion", unSet.toString)
+    val tuplaSucursalArg2: Tupla=new Tupla("furgoneta", unSet1.toString)
+    val tuplaSucursalChi: Tupla=new Tupla("avion", unSet2.toString)
     var expec:Set[Tupla]=Set()
-    expec+=tuplaCamion
-    expec+=tuplaFurgoneta
-    expec+=tuplaAvion
+    expec+=tuplaSucursalArg
+    expec+=tuplaSucursalArg2
+    expec+=tuplaSucursalChi
+    
     var datos:Set[Tupla]=Set()
-    datos=stats.estadisticasPorTransporte(sucursalArg.viajesRealizados,cantidadDeEnvios,estadisticasPorEnvioSinFiltros,sinFiltroFechas,new Date,new Date)
+    datos=stats.estadisticasPorTransporte(sucursalArg.viajesRealizados,stats.cantidadDeEnvios,stats.estadisticasPorEnvioSinFiltros,stats.sinFiltroFechas,new Date,new Date)
     assertEquals(datos,expec)
      } 
 
