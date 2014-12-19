@@ -405,16 +405,17 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
-    val tuplaCamion: Tupla=new Tupla("camion", 1)
-    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 1)
-    val tuplaAvion: Tupla=new Tupla("avion", 1)
+    val tuplaCamion: Tupla=new Tupla("camion", 1.toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 1.toString)
+    val tuplaAvion: Tupla=new Tupla("avion", 1.toString)
+    var expec:Set[Tupla]=Set()
+    expec+=tuplaCamion
+    expec+=tuplaFurgoneta
+    expec+=tuplaAvion
     var datos:Set[Tupla]=Set()
-    datos += tuplaCamion 
-    datos += tuplaFurgoneta 
-    datos += tuplaAvion
-    assertEquals(datos,stats.viajesPorTipoTransporte(sucursalArg.viajesRealizados))
-    stats.viajesPorTipoTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
-  }
+    datos=stats.viajesPorTipoTransporte(sucursalArg.viajesRealizados)
+    assertEquals(datos,expec)
+    }
   
   @Test
   def `Cantidad de envios por transporte` = {
@@ -438,8 +439,17 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
-    
-    stats.enviosPorTipoTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
+    val tuplaCamion: Tupla=new Tupla("camion", 1.toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 2.toString)
+    val tuplaAvion: Tupla=new Tupla("avion", 1.toString)
+    var expec:Set[Tupla]=Set()
+    expec+=tuplaCamion
+    expec+=tuplaFurgoneta
+    expec+=tuplaAvion
+    var datos:Set[Tupla]=Set()
+    datos=stats.enviosPorTipoTransporte(sucursalArg.viajesRealizados)
+    assertEquals(datos,expec)
+     
   }
   
   @Test
@@ -462,9 +472,10 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
-    stats.facturacionTotalPorRangoFecha(sucursalArg.viajesRealizados, new Date(2014,11,1), new Date(2014,11,5)) // Imprime estadistica en consola
-    stats.facturacionTotalPorRangoFecha(sucursalArg.viajesRealizados, new Date(2014,11,6), new Date(2014,11,11)) // Imprime estadistica en consola
-    stats.facturacionTotalPorRangoFecha(sucursalArg.viajesRealizados, new Date(2014,11,12), new Date(2014,11,22)) // Imprime estadistica en consola
+    
+   // stats.facturacionTotalPorRangoFecha(sucursalArg.viajesRealizados, new Date(2014,11,1), new Date(2014,11,5)) // Imprime estadistica en consola
+    //stats.facturacionTotalPorRangoFecha(sucursalArg.viajesRealizados, new Date(2014,11,6), new Date(2014,11,11)) // Imprime estadistica en consola
+    //stats.facturacionTotalPorRangoFecha(sucursalArg.viajesRealizados, new Date(2014,11,12), new Date(2014,11,22)) // Imprime estadistica en consola
   }  
   
   @Test
@@ -488,7 +499,7 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
-    stats.facturacionTotalPorFecha(sucursalArg.viajesRealizados, new Date(2014,11,7)) // Imprime estadistica en consola
+  //  stats.facturacionTotalPorFecha(sucursalArg.viajesRealizados, new Date(2014,11,7)) // Imprime estadistica en consola
   }
 
   @Test
@@ -525,7 +536,7 @@ class EstadisticasTest {
     sucursalChi.mandarTransporte(furgoneta3)
     sucursalChi.mandarTransporte(avion3)
     
-    stats.facturacionCompaniaPorSucursal(Set(sucursalArg,sucursalArg2, sucursalChi)) // Imprime estadistica en consola
+    //stats.facturacionCompaniaPorSucursal(Set(sucursalArg,sucursalArg2, sucursalChi)) // Imprime estadistica en consola
   } 
   
   @Test
@@ -547,9 +558,17 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
-    
-    stats.tiempoPromedioPorTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
-  }
+    val tuplaCamion: Tupla=new Tupla("camion", 25.0.toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 6.25.toString)
+    val tuplaAvion: Tupla=new Tupla("avion", 3.0.toString)
+    var expec:Set[Tupla]=Set()
+    expec+=tuplaCamion
+    expec+=tuplaFurgoneta
+    expec+=tuplaAvion
+    var datos:Set[Tupla]=Set()
+    datos=stats.tiempoPromedioPorTransporte(sucursalArg.viajesRealizados)
+    assertEquals(datos,expec)
+    }
   
  @Test
   def `Ganancia promedio por transporte` = {
@@ -570,9 +589,18 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(camion1)
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
-    
-    stats.gananciaPromedioPorTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
-  }
+    val tuplaCamion: Tupla=new Tupla("camion", -149990.0.toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", -19930.0.toString)
+    val tuplaAvion: Tupla=new Tupla("avion", -824930.0.toString)
+    var expec:Set[Tupla]=Set()
+    expec+=tuplaCamion
+    expec+=tuplaFurgoneta
+    expec+=tuplaAvion
+    var datos:Set[Tupla]=Set()
+    datos=stats.gananciaPromedioPorTransporte(sucursalArg.viajesRealizados)
+    assertEquals(datos,expec)
+     }
+ 
   @Test
   def `Costo promedio por transporte` = {
     val sucursalArg2 = new Sucursal(Set(),1000,"Argentina")  
@@ -593,6 +621,15 @@ class EstadisticasTest {
     sucursalArg.mandarTransporte(furgoneta1)
     sucursalArg.mandarTransporte(avion1)
     
-    stats.costoPromedioPorTransporte(sucursalArg.viajesRealizados) // Imprime estadistica en consola
-  }  
+    val tuplaCamion: Tupla=new Tupla("camion", 150070.0.toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", 20010.0.toString)
+    val tuplaAvion: Tupla=new Tupla("avion", 825010.0.toString)
+    var expec:Set[Tupla]=Set()
+    expec+=tuplaCamion
+    expec+=tuplaFurgoneta
+    expec+=tuplaAvion
+    var datos:Set[Tupla]=Set()
+    datos=stats.costoPromedioPorTransporte(sucursalArg.viajesRealizados)
+    assertEquals(datos,expec)
+     }  
 }

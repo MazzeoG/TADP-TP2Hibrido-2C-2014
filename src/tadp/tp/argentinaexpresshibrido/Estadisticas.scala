@@ -3,7 +3,7 @@ package tadp.tp.argentinaexpresshibrido
 import java.text.SimpleDateFormat
 import java.util.{Calendar, Date}
 
-class Tupla (nombre:String, cantidad:Unit){
+case class Tupla (nombre:String, cantidad:String){
 }
 
 class Estadisticas extends prettyPrinter{
@@ -78,16 +78,16 @@ class Estadisticas extends prettyPrinter{
     val viajesFurgoneta : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Furgoneta")
     val viajesAvion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Avion")
     
-//    println(titulo)
-//    println("--------------------------")
-//    println("Transporte   -    " + subt)
-//    println("Camion       :    " + f2(viajesCamion))
-//    println("Furgoneta    :    " + f2(viajesFurgoneta))
-//    println("Avion        :    " + f2(viajesAvion))
-//    println("--------------------------\n")
-    val tuplaCamion: Tupla=new Tupla("camion", filtro(viajesCamion,comparacion))
-    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", filtro(viajesFurgoneta,comparacion))
-    val tuplaAvion: Tupla=new Tupla("avion", filtro(viajesAvion,comparacion))
+    //println(titulo)
+    println("--------------------------")
+    //println("Transporte   -    " + subt)
+    println("Camion       :    " + comparacion(viajesCamion))
+    println("Furgoneta    :    " + comparacion(viajesFurgoneta))
+    println("Avion        :    " + comparacion(viajesAvion))
+    println("--------------------------\n")
+    val tuplaCamion: Tupla =new Tupla("camion", filtro(viajesCamion,comparacion).toString)
+    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", filtro(viajesFurgoneta,comparacion).toString)
+    val tuplaAvion: Tupla=new Tupla("avion", filtro(viajesAvion,comparacion).toString)
     var datos:Set[Tupla]=Set()
     datos += tuplaCamion 
     datos += tuplaFurgoneta 
@@ -133,18 +133,18 @@ class Estadisticas extends prettyPrinter{
     val viajesRefrigeracion : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Refrigeracion")
     val viajesFragil : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Fragil")
     
-    /*println(titulo)
+   // println(titulo)
     println("--------------------------")
-    println("Envio   -    " + subt)
-    println("Normal       :    " + f2(viajesNormal))
-    println("Urgente    :    " + f2(viajesUrgente))
-    println("Refrigeracion        :    " + f2(viajesRefrigeracion))
-    println("Fragil        :    " + f2(viajesFragil))
-    println("--------------------------\n")*/
-    val tuplaNormal: Tupla=new Tupla("camion", comparacion(viajesNormal))
-    val tuplaUrgente: Tupla=new Tupla("furgoneta", comparacion(viajesUrgente))
-    val tuplaRefrigeracion: Tupla=new Tupla("avion", comparacion(viajesRefrigeracion))
-    val tuplaFragil: Tupla=new Tupla("avion", comparacion(viajesFragil))
+    //println("Envio   -    " + subt)
+    println("Normal       :    " + comparacion(viajesNormal))
+    println("Urgente    :    " + comparacion(viajesUrgente))
+    println("Refrigeracion        :    " + comparacion(viajesRefrigeracion))
+    println("Fragil        :    " + comparacion(viajesFragil))
+    println("--------------------------\n")
+    val tuplaNormal: Tupla=new Tupla("camion", comparacion(viajesNormal).toString)
+    val tuplaUrgente: Tupla=new Tupla("furgoneta", comparacion(viajesUrgente).toString)
+    val tuplaRefrigeracion: Tupla=new Tupla("avion", comparacion(viajesRefrigeracion).toString)
+    val tuplaFragil: Tupla=new Tupla("avion", comparacion(viajesFragil).toString)
     var datos:Set[Tupla]=Set()
     datos += tuplaNormal 
     datos += tuplaUrgente 
