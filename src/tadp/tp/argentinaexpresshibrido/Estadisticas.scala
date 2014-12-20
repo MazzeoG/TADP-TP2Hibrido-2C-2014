@@ -91,6 +91,27 @@ class Estadisticas extends prettyPrinter{
     datos
   }
   
+    //funcion identidad para las estadisticas
+  def estadisticaIdentidad2(viajes: Set[Viaje], comparacion: (Set[Viaje]) => String,filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje],
+      fechaIni : Date, fechaFin : Date): Set[(String, String)]
+  ={
+    var viajesFiltrados: Set[Viaje] = filtroFecha(viajes,fechaIni,fechaFin)
+    var datos:Set[(String, String)]=Set()
+    datos += ("sin filtro",comparacion(viajesFiltrados))
+    datos
+  }
+  
+   //funcion identidad para las estadisticas   //asi no me estarpia tirando error, pero no la chequee con todo cambiado a string, string
+  def estadisticaIdentidad3(viajes: Set[Viaje], comparacion: (Set[Viaje]) => String,filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje],
+      fechaIni : Date, fechaFin : Date): Set[(String, String)]
+  ={
+    var viajesFiltrados: Set[Viaje] = filtroFecha(viajes,fechaIni,fechaFin)
+    var datos:Set[(String, String)]=Set()
+    val tupla:(String, String)=("sin filtro",comparacion(viajesFiltrados))
+    datos += tupla
+    datos
+  }
+  
   // Comparacion entre distintos tipos de Transporte
   def estadisticasPorTransporteSinFiltros(
       viajes: Set[Viaje], comparacion: (Set[Viaje]) => String,filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje],
