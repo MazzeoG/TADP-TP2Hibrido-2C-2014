@@ -83,11 +83,11 @@ class Estadisticas extends prettyPrinter{
  
   //funcion identidad para las estadisticas
   def estadisticaIdentidad(viajes: Set[Viaje], comparacion: (Set[Viaje]) => String,filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje],
-      fechaIni : Date, fechaFin : Date): Set[Tupla]
+      fechaIni : Date, fechaFin : Date): Set[(String,String)]
   ={
     var viajesFiltrados: Set[Viaje] = filtroFecha(viajes,fechaIni,fechaFin)
-    var datos:Set[Tupla]=Set()
-    datos += new Tupla("sin filtro",comparacion(viajesFiltrados))
+    var datos:Set[(String,String)]=Set()
+    datos += ("sin filtro" -> comparacion(viajesFiltrados))
     datos
   }
   
@@ -139,7 +139,7 @@ class Estadisticas extends prettyPrinter{
    }
   
   def estadisticasPorTransporte(
-      viajes: Set[Viaje], comparacion: (Set[Viaje]) => String,filtro: (Set[Viaje],Set[Viaje]=> String,(Set[Viaje],Date,Date) => Set[Viaje],Date,Date) => Set[Tupla],
+      viajes: Set[Viaje], comparacion: (Set[Viaje]) => String,filtro: (Set[Viaje],Set[Viaje]=> String,(Set[Viaje],Date,Date) => Set[Viaje],Date,Date) => Set[(String,String)],
       filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje], fechaIni : Date, fechaFin : Date)
   :Set[(String, String)]
   ={
@@ -209,7 +209,7 @@ class Estadisticas extends prettyPrinter{
   
   def estadisticasPorEnvio(
       viajes: Set[Viaje], comparacion: Set[Viaje] => String,
-      filtro: (Set[Viaje],Set[Viaje]=> String,(Set[Viaje],Date,Date) => Set[Viaje],Date,Date) => Set[Tupla],
+      filtro: (Set[Viaje],Set[Viaje]=> String,(Set[Viaje],Date,Date) => Set[Viaje],Date,Date) => Set[(String,String)],
       filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje],
       fechaIni : Date, fechaFin : Date) :Set[(String, String)]
   ={
@@ -220,15 +220,15 @@ class Estadisticas extends prettyPrinter{
   
   // Comparacion entre distintas Sucursales
   // Comparacion entre distintas Sucursales
-  def estadisticasPorSucursal(sucursales : Set[Sucursal], filtro: (Set[Viaje],Set[Viaje]=> String,(Set[Viaje],Date,Date) => Set[Viaje],Date,Date) => Set[Tupla],
-      comparacion: Set[Viaje] => String, filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje], fechaIni : Date, fechaFin : Date) :Set[Tupla2]
+  def estadisticasPorSucursal(sucursales : Set[Sucursal], filtro: (Set[Viaje],Set[Viaje]=> String,(Set[Viaje],Date,Date) => Set[Viaje],Date,Date) => Set[(String,String)],
+      comparacion: Set[Viaje] => String, filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje], fechaIni : Date, fechaFin : Date) :Set[(String, Set[(String,String)])]
   ={
-    var datos2:Set[Tupla2]=Set()
-    var datos:Set[Tupla]=Set()
+    var datos2:Set[(String, Set[(String,String)])]=Set()
+    var datos:Set[(String,String)]=Set()
     sucursales.foreach({s =>
       var viajesSucursal = s.viajesRealizados 
       datos = datos ++ filtro(viajesSucursal,comparacion,filtroFecha,fechaIni,fechaFin)
-      datos2 += new Tupla2(s.pais,datos)
+      datos2 += (s.pais -> datos)
       datos = Set()
     })
     datos2
