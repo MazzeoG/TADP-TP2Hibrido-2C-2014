@@ -415,8 +415,6 @@ class EstadisticasTest {
     expec+=tuplaAvion
     var datos:Set[(String, String)]=Set()
     datos=stats.viajesPorTipoTransporte(sucursalArg.viajesRealizados)
-    println(datos)
-    println(datos.toString)
     assertEquals(datos,expec)
     }
   

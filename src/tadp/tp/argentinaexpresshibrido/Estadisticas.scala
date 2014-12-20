@@ -2,13 +2,13 @@ package tadp.tp.argentinaexpresshibrido
 
 import java.text.SimpleDateFormat
 import java.util.{Calendar, Date}
-
+/*
 case class Tupla (nombre:String, cantidad:String){
 }
 
 case class Tupla2 (nombre:String, tuplas:Set[Tupla]){
 }
-
+*/
 class Estadisticas extends prettyPrinter{
 
   def filtrarPorSucursalDestino(viajes: Set[Viaje], sucursalBuscada : Sucursal): Set[Viaje] ={
