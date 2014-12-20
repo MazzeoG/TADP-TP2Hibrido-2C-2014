@@ -63,16 +63,21 @@ class Estadisticas extends prettyPrinter{
     	0.toString
   }
   
-  def cantidadDeEnvios(viajes: Set[Viaje]) : String ={
-    viajes.toList.map(_.pedidos.size).sum.toString
-  }
-  
   def cantidadDeViajes(viajes: Set[Viaje]) : String ={
     viajes.size.toString
   }
   
+  def cantidadDeEnvios(viajes: Set[Viaje]) : String ={
+        filtroSimpleMap(viajes, (_.pedidos.size))
+  }
+    
   def calcularFacturacionTotal(viajes: Set[Viaje]) : String ={
-    viajes.toList.map(_.ganancia).sum.toString
+        filtroSimpleMap(viajes, (_.ganancia))
+  }
+  
+  def filtroSimpleMap(viajes: Set[Viaje], f :(Viaje => Double)):String =
+  {
+    viajes.toList.map(f).sum.toString
   }
   
  
