@@ -91,16 +91,7 @@ class Estadisticas extends prettyPrinter{
     datos
   }
   
-    //funcion identidad para las estadisticas
-  def estadisticaIdentidad2(viajes: Set[Viaje], comparacion: (Set[Viaje]) => String,filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje],
-      fechaIni : Date, fechaFin : Date): Set[(String, String)]
-  ={
-    var viajesFiltrados: Set[Viaje] = filtroFecha(viajes,fechaIni,fechaFin)
-    var datos:Set[(String, String)]=Set()
-    datos += ("sin filtro",comparacion(viajesFiltrados))
-    datos
-  }
-  
+
    //funcion identidad para las estadisticas   //asi no me estarpia tirando error, pero no la chequee con todo cambiado a string, string
   def estadisticaIdentidad3(viajes: Set[Viaje], comparacion: (Set[Viaje]) => String,filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje],
       fechaIni : Date, fechaFin : Date): Set[(String, String)]
@@ -116,17 +107,17 @@ class Estadisticas extends prettyPrinter{
   def estadisticasPorTransporteSinFiltros(
       viajes: Set[Viaje], comparacion: (Set[Viaje]) => String,filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje],
       fechaIni : Date, fechaFin : Date)
-  :Set[Tupla] 
+  :Set[(String, String)] 
   ={
     
     val viajesCamion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Camion")
     val viajesFurgoneta : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Furgoneta")
     val viajesAvion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Avion")
     
-    val tuplaCamion: Tupla =new Tupla("camion", comparacion(viajesCamion))
-    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", comparacion(viajesFurgoneta))
-    val tuplaAvion: Tupla=new Tupla("avion", comparacion(viajesAvion))
-    var datos:Set[Tupla]=Set()
+    val tuplaCamion =("camion", comparacion(viajesCamion))
+    val tuplaFurgoneta=("furgoneta", comparacion(viajesFurgoneta))
+    val tuplaAvion=("avion", comparacion(viajesAvion))
+    var datos:Set[(String, String)]=Set()
     datos += tuplaCamion 
     datos += tuplaFurgoneta 
     datos += tuplaAvion
@@ -136,17 +127,17 @@ class Estadisticas extends prettyPrinter{
   def estadisticasPorTransporte(
       viajes: Set[Viaje], comparacion: (Set[Viaje]) => String,filtro: (Set[Viaje],Set[Viaje]=> String,(Set[Viaje],Date,Date) => Set[Viaje],Date,Date) => Set[Tupla],
       filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje], fechaIni : Date, fechaFin : Date)
-  :Set[Tupla] 
+  :Set[(String, String)]
   ={
     
     val viajesCamion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Camion")
     val viajesFurgoneta : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Furgoneta")
     val viajesAvion : Set[Viaje] = filtrarPorTipoDeTransporte(viajes, "Avion")
     
-    val tuplaCamion: Tupla =new Tupla("camion", filtro(viajesCamion,comparacion,filtroFecha,fechaIni,fechaFin).toString)
-    val tuplaFurgoneta: Tupla=new Tupla("furgoneta", filtro(viajesFurgoneta,comparacion,filtroFecha,fechaIni,fechaFin).toString)
-    val tuplaAvion: Tupla=new Tupla("avion", filtro(viajesAvion,comparacion,filtroFecha,fechaIni,fechaFin).toString)
-    var datos:Set[Tupla]=Set()
+    val tuplaCamion=("camion", filtro(viajesCamion,comparacion,filtroFecha,fechaIni,fechaFin).toString)
+    val tuplaFurgoneta=("furgoneta", filtro(viajesFurgoneta,comparacion,filtroFecha,fechaIni,fechaFin).toString)
+    val tuplaAvion=("avion", filtro(viajesAvion,comparacion,filtroFecha,fechaIni,fechaFin).toString)
+    var datos:Set[(String, String)]=Set()
     datos += tuplaCamion 
     datos += tuplaFurgoneta 
     datos += tuplaAvion
@@ -154,50 +145,50 @@ class Estadisticas extends prettyPrinter{
    }
   
   //Ejemplos de distintos filtros posibles
-  def enviosPorTipoTransporte(viajes: Set[Viaje]) :Set[Tupla]= {
-    var datos:Set[Tupla]=Set()
+  def enviosPorTipoTransporte(viajes: Set[Viaje]) :Set[(String, String)]= {
+    var datos:Set[(String, String)]=Set()
     datos = estadisticasPorTransporte(viajes,cantidadDeEnvios,estadisticaIdentidad,sinFiltroFechas,new Date,new Date) //("ENVIOS POR TRANSPORTE","Cantidad")
     datos
   }
   
-  def tiempoPromedioPorTransporte(viajes: Set[Viaje]) :Set[Tupla]= {
-   var datos:Set[Tupla]=Set()
+  def tiempoPromedioPorTransporte(viajes: Set[Viaje]) :Set[(String, String)]= {
+   var datos:Set[(String, String)]=Set()
     datos= estadisticasPorTransporte(viajes,tiempoPromedioDeViajes,estadisticaIdentidad,sinFiltroFechas,new Date,new Date) //("TIEMPO PROMEDIO DE VIAJE","Tiempo(Hr)")
     datos
   }
   
-   def costoPromedioPorTransporte(viajes: Set[Viaje]) :Set[Tupla]= {
-    var datos:Set[Tupla]=Set()
+   def costoPromedioPorTransporte(viajes: Set[Viaje]) :Set[(String, String)]= {
+    var datos:Set[(String, String)]=Set()
     datos= estadisticasPorTransporte(viajes,costoPromedioDeViajes,estadisticaIdentidad,sinFiltroFechas,new Date,new Date) //("COSTO PROMEDIO DE VIAJE","Costo($)")
     datos
    }
    
-  def gananciaPromedioPorTransporte(viajes: Set[Viaje]):Set[Tupla] = {
-    var datos:Set[Tupla]=Set()
+  def gananciaPromedioPorTransporte(viajes: Set[Viaje]):Set[(String, String)] = {
+    var datos:Set[(String, String)]=Set()
     datos= estadisticasPorTransporte(viajes,gananciaPromedioDeViajes,estadisticaIdentidad,sinFiltroFechas,new Date,new Date) //("GANANCIA PROMEDIO DE VIAJE","Ganancia($)")
     datos
   }
   
-  def viajesPorTipoTransporte(viajes: Set[Viaje])  :Set[Tupla]= {
-    var datos:Set[Tupla]=Set()
+  def viajesPorTipoTransporte(viajes: Set[Viaje])  :Set[(String, String)]= {
+    var datos:Set[(String, String)]=Set()
     datos= estadisticasPorTransporte(viajes,cantidadDeViajes,estadisticaIdentidad,sinFiltroFechas,new Date,new Date) //("VIAJES POR TRANSPORTE","Cantidad")
     datos
   }
   
   def estadisticasPorEnvioSinFiltros(
       viajes: Set[Viaje], comparacion: Set[Viaje] => String,filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje],
-      fechaIni : Date, fechaFin : Date) 
+      fechaIni : Date, fechaFin : Date) :Set[(String, String)]
   ={
     val viajesNormal : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Normal")
     val viajesUrgente : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Urgente")
     val viajesRefrigeracion : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Refrigeracion")
     val viajesFragil : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Fragil")
     
-    val tuplaNormal: Tupla=new Tupla("Normal", comparacion(viajesNormal))
-    val tuplaUrgente: Tupla=new Tupla("Urgente", comparacion(viajesUrgente))
-    val tuplaRefrigeracion: Tupla=new Tupla("Refrigeracion", comparacion(viajesRefrigeracion))
-    val tuplaFragil: Tupla=new Tupla("Fragil", comparacion(viajesFragil))
-    var datos:Set[Tupla]=Set()
+    val tuplaNormal=("Normal", comparacion(viajesNormal))
+    val tuplaUrgente=("Urgente", comparacion(viajesUrgente))
+    val tuplaRefrigeracion=("Refrigeracion", comparacion(viajesRefrigeracion))
+    val tuplaFragil=("Fragil", comparacion(viajesFragil))
+    var datos:Set[(String, String)]=Set()
     datos += tuplaNormal 
     datos += tuplaUrgente 
     datos += tuplaRefrigeracion 
@@ -209,7 +200,7 @@ class Estadisticas extends prettyPrinter{
       viajes: Set[Viaje], comparacion: Set[Viaje] => String,
       filtro: (Set[Viaje],Set[Viaje]=> String,(Set[Viaje],Date,Date) => Set[Viaje],Date,Date) => Set[Tupla],
       filtroFecha: (Set[Viaje],Date,Date) => Set[Viaje],
-      fechaIni : Date, fechaFin : Date) :Set[Tupla]
+      fechaIni : Date, fechaFin : Date) :Set[(String, String)]
   ={
     
     val viajesNormal : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Normal")
@@ -217,11 +208,11 @@ class Estadisticas extends prettyPrinter{
     val viajesRefrigeracion : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Refrigeracion")
     val viajesFragil : Set[Viaje] = filtrarPorTipoDeEnvio(viajes, "Fragil")
     
-    val tuplaNormal: Tupla=new Tupla("camion", filtro(viajesNormal,comparacion,filtroFecha,fechaIni,fechaFin).toString)
-    val tuplaUrgente: Tupla=new Tupla("furgoneta", filtro(viajesUrgente,comparacion,filtroFecha,fechaIni,fechaFin).toString)
-    val tuplaRefrigeracion: Tupla=new Tupla("avion", filtro(viajesRefrigeracion,comparacion,filtroFecha,fechaIni,fechaFin).toString)
-    val tuplaFragil: Tupla=new Tupla("avion", filtro(viajesFragil,comparacion,filtroFecha,fechaIni,fechaFin).toString)
-    var datos:Set[Tupla]=Set()
+    val tuplaNormal=("camion", filtro(viajesNormal,comparacion,filtroFecha,fechaIni,fechaFin).toString)
+    val tuplaUrgente=("furgoneta", filtro(viajesUrgente,comparacion,filtroFecha,fechaIni,fechaFin).toString)
+    val tuplaRefrigeracion=("avion", filtro(viajesRefrigeracion,comparacion,filtroFecha,fechaIni,fechaFin).toString)
+    val tuplaFragil=("avion", filtro(viajesFragil,comparacion,filtroFecha,fechaIni,fechaFin).toString)
+    var datos:Set[(String, String)]=Set()
     datos += tuplaNormal 
     datos += tuplaUrgente 
     datos += tuplaRefrigeracion 
