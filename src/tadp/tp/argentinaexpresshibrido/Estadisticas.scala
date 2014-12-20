@@ -42,22 +42,23 @@ class Estadisticas extends prettyPrinter{
   } 
   
   def tiempoPromedioDeViajes(viajes: Set[Viaje]) : String = {
-    if(!viajes.isEmpty)
-    	(viajes.toList.map(_.tiempoHr).sum / viajes.size).toString
-    else
-    	0.toString
+   
+    	 filtroMap(viajes, (_.tiempoHr))
   }  
   
   def costoPromedioDeViajes(viajes: Set[Viaje]) : String = {
-    if(!viajes.isEmpty)
-    	(viajes.toList.map(_.costo).sum / viajes.size).toString()
-    else
-    	0.toString()
+ 
+    	 filtroMap(viajes, (_.costo))
   }
 
   def gananciaPromedioDeViajes(viajes: Set[Viaje]) : String = {
+        filtroMap(viajes, (_.ganancia))
+  }
+  
+  def filtroMap(viajes: Set[Viaje], f :(Viaje => Double)):String =
+  {
     if(!viajes.isEmpty)
-    	(viajes.toList.map(_.ganancia).sum / viajes.size).toString
+    	(viajes.toList.map(f).sum / viajes.size).toString
     else
     	0.toString
   }
